@@ -1,0 +1,832 @@
+/* ==========================================================================
+   1. VARIABLES & CONFIGURACIÓN
+   ========================================================================== */
+:root {
+    /* Inter font settings */
+    font-family: Inter, sans-serif;
+    font-feature-settings: 'liga'1, 'calt'1;
+
+    /* Glyph Inspector - Colores */
+    --bg-color: #fff;
+    --text-color: #000;
+    --border-color: #333;
+    --hover-bg: rgba(0, 0, 0, 0.05);
+    --selected-bg: rgba(0, 0, 0, 0.1);
+
+    /* Glyph Inspector - Letra principal */
+    --letter-font-size: 20vw;
+    --letter-font-weight: 400;
+    --letter-line-height: 1;
+
+    /* Glyph Inspector - Paneles */
+    --preview-panel-width: 50%;
+    --grid-panel-width: 50%;
+    --grid-cell-size: 50px;
+    --grid-slider-height: 32px;
+    --grid-cell-font-size: 1.2rem;
+    --grid-cell-font-weight: 400;
+    --transition-speed: 0.1s;
+}
+
+@supports (font-variation-settings: normal) {
+    :root {
+        font-family: InterVariable, sans-serif;
+    }
+}
+
+
+/* ==========================================================================
+   2. RESET GENERAL
+   ========================================================================== */
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: Inter, sans-serif;
+    font-weight: 500;
+    line-height: .9;
+    letter-spacing: -.05em;
+    user-select: none;
+    /* Corregido: faltaba punto y coma */
+    box-sizing: border-box;
+}
+
+html {}
+
+body {
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+p {
+    line-height: 1.05;
+    letter-spacing: -.025;
+}
+
+h1 {
+    font-size: 1rem;
+}
+
+
+/* ==========================================================================
+   3. UTILIDADES & EFECTOS
+   ========================================================================== */
+.glass {
+    position: fixed;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(3px);
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
+    border: solid 1px;
+}
+
+.overflow-hidden {
+    overflow: hidden;
+}
+
+.absolute-align {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.empty-6rem-space-bottom {
+    padding-bottom: 6em;
+}
+
+.orange {
+    color: orange;
+}
+
+.align {
+    font-size: .85rem;
+}
+
+
+/* ==========================================================================
+   4. ESTRUCTURA & SECCIONES
+   ========================================================================== */
+.section {
+    width: 100vw;
+    height: 100vh;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.header {
+    display: flex;
+    align-items: flex-start;
+    width: 100vw;
+    justify-content: flex-start;
+    width: 100%;
+    height: fit-content;
+}
+
+.section-auto {
+    margin: 2rem 0rem 4rem 0rem;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+}
+
+.column img {
+    width: clamp(200px, 45%, 400px);
+    padding: 2em 0em 0em 0em;
+}
+
+.column img:nth-child(1) {
+    padding: 0em 0em 0em 0em;
+}
+
+
+/* ==========================================================================
+   5. TEXTOS & TIPOGRAFÍA
+   ========================================================================== */
+.title-page {
+    user-select: none;
+}
+
+.bg-big-inter {
+    display: flex;
+    position: absolute;
+    mix-blend-mode: difference;
+    top: 38%;
+    font-size: 1160px;
+    color: transparent;
+    -webkit-text-stroke: 1px black;
+    z-index: -1;
+    user-select: none;
+}
+
+.inner-big-type {
+    position: relative;
+    top: -50vh;
+}
+
+.text-title {
+    padding: 6rem 4rem 2rem 4rem;
+}
+
+.text-block {
+    padding: 4rem 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.text-block p {
+    width: 48%;
+    font-size: 1rem;
+}
+
+.text-block:nth-child(1) {
+    padding: 6rem 1rem 1rem 1rem;
+}
+
+.text-block:nth-child(2) {
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.text-container {
+    display: flex;
+    padding: 0rem 1rem;
+    padding-top: 2rem;
+}
+
+/* Clases de utilidad tipográfica */
+.h4-falso {
+    color: gray;
+    font-size: 1rem;
+}
+
+.font-12pt {
+    font-size: 12pt !important;
+}
+
+.font-8pt {
+    font-size: 8pt !important;
+}
+
+.font-10pt {
+    font-size: 10pt !important;
+}
+
+.font-size-sub {
+    font-size: .75rem;
+    font-weight: 400;
+    color: gray;
+    text-transform: uppercase;
+}
+
+
+/* ==========================================================================
+   6. NAVEGACIÓN
+   ========================================================================== */
+.nav-bar {
+    position: fixed;
+    bottom: 4rem;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid #000;
+    padding: .25rem .25rem .25rem 1.15rem;
+    display: inline-block;
+    border-radius: 1000px;
+    z-index: 9999;
+}
+
+.nav-items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    height: auto;
+    gap: .5rem;
+}
+
+
+/* ==========================================================================
+   7. WIDGETS (PDF, LOTTIE, CARPETA)
+   ========================================================================== */
+.pdf-big-file img {
+    width: 48vw;
+    margin-bottom: 4rem;
+    max-width: 320px;
+}
+
+#lottie-container {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    margin-left: .5rem;
+    border-left: 1px solid gray;
+    display: block;
+    overflow: visible;
+    position: relative;
+    cursor: pointer;
+}
+
+#lottie-container svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+#mi-carpeta-descargas {
+    width: 80px;
+    position: fixed;
+    left: 20%;
+    bottom: 24%;
+    z-index: 8888;
+}
+
+
+/* ==========================================================================
+   8. GLYPH INSPECTOR COMPONENT
+   ========================================================================== */
+#glyph-inspector-section {
+    padding: 0;
+    margin: 0;
+}
+
+#glyphs {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--bg-color);
+}
+
+/* Panel de vista previa (izquierdo) */
+.preview-panel {
+    width: var(--preview-panel-width);
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: sticky;
+    top: 0;
+    background-color: var(--bg-color);
+}
+
+.preview-panel .letter {
+    font-family: 'Inter', sans-serif;
+    font-size: var(--letter-font-size);
+    font-weight: var(--letter-font-weight);
+    line-height: var(--letter-line-height);
+    color: var(--text-color);
+    user-select: none;
+}
+
+/* Panel de grilla (derecho) */
+.glyph-list {
+    width: var(--grid-panel-width);
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background-color: var(--bg-color);
+    box-shadow: inset 0 0 0 1px var(--border-color);
+}
+
+.glyph-list .content {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(var(--grid-cell-size), 1fr));
+}
+
+.glyph-list .content a {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: var(--text-color);
+    border-right: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    font-size: var(--grid-cell-font-size);
+    font-weight: var(--grid-cell-font-weight);
+    background: transparent;
+    cursor: pointer;
+    margin-right: -1px;
+    margin-bottom: -1px;
+    transition: background-color var(--transition-speed);
+}
+
+.glyph-list .content a:hover {
+    background-color: var(--hover-bg);
+}
+
+.glyph-list .content a.selected {
+    background-color: var(--selected-bg);
+}
+
+/* Responsive Inspector */
+@media (max-width: 768px) {
+    #glyphs {
+        flex-direction: column;
+    }
+
+    .preview-panel {
+        width: 100%;
+        padding-bottom: 2rem;
+        height: auto;
+        border-bottom: none solid var(--border-color);
+    }
+
+    .preview-panel .letter {
+        font-size: 40vw;
+    }
+
+    .glyph-list {
+        width: 100%;
+        height: 50vh;
+    }
+
+    .glyph-list .content {
+        grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+    }
+}
+
+
+/* ==========================================================================
+   9. INTERACCIONES (HOVER / OVERLAY / CURSOR)
+   ========================================================================== */
+
+/* Movimiento Hover */
+[movimiento-hover-press] {
+    transition: transform 0.25s ease;
+    transform-origin: center;
+}
+
+@media (hover: hover) {
+    [movimiento-hover-press]:hover {
+        transform: rotate(4deg);
+    }
+}
+
+[movimiento-hover-press]:active {
+    transform: rotate(4deg);
+}
+
+/* Cursor interactivo */
+.section img[movimiento-hover-press-view] {
+    cursor: pointer;
+}
+
+#custom-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: .75rem;
+    height: .75rem;
+    border-radius: 80px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+    border: solid 1px;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.85rem;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: width 0.2s ease, height 0.2s ease;
+    white-space: nowrap;
+}
+
+#cursor-text {
+    padding: 0.25rem;
+    display: block;
+}
+
+[data-cursor-text]:hover {
+    cursor: none;
+}
+
+.cursor-scale {
+    transform: scale(1.02);
+}
+
+/* Overlay Imágenes */
+.image-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.image-overlay img {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    touch-action: none;
+}
+
+.image-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+
+/* ==========================================================================
+   10. SOPORTE DE IDIOMAS (LISTA)
+   ========================================================================== */
+.language-support-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.language {
+    width: 100%;
+    height: auto;
+    padding: 0 40% 0 45%;
+    display: inline-block;
+    transition: background-color 0s ease, color 0.1s ease;
+}
+
+.language_title {
+    width: 100%;
+    height: auto;
+    padding: 0 0 0 45%;
+    display: inline-block;
+    transition: background-color 0s ease, color 0.1s ease;
+}
+
+.language:hover {
+    background-color: red;
+    border-top: 1px solid #000;
+    /* Arriba */
+    border-bottom: 1px solid #000;
+    /* Abajo */
+}
+
+
+/* ==========================================================================
+   11. CARRUSEL 3D
+   ========================================================================== */
+.carousel-container {
+    position: relative;
+    /* align-items: top; <- Esto no es CSS válido, se borra */
+
+    /* 1. EL CARRIL: Tiene que ser alto para tener recorrido */
+    height: 350vh;
+
+    width: 100%;
+
+    /* 2. EL CULPABLE: NUNCA pongas overflow:hidden aquí si usas sticky dentro */
+    overflow: visible;
+}
+
+.carousel-sticky {
+    /* 3. LA CÁMARA FIJA: Se pega al techo */
+    position: sticky;
+    position: -webkit-sticky;
+    /* Para Safari */
+    top: 0;
+
+    /* 4. ALTURA: Ocupa toda la pantalla para centrar el 3D */
+    height: 100vh;
+
+    width: 100%;
+
+    /* Centrado del contenido */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* Permite ver el 3D si se sale un poco de los bordes */
+    overflow: visible;
+}
+
+.carousel-scene {
+    position: relative;
+    perspective: 1500px;
+    transform-style: preserve-3d;
+    width: min(50vw, 600px);
+    aspect-ratio: 1 / 1;
+    max-width: 450px;
+    max-height: 600px;
+}
+
+.carousel-item img {
+    object-fit: fill;
+    /* <--- LA CLAVE: Ajusta sin recortar */
+    display: block;
+}
+
+.carousel-3d {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.05s linear;
+}
+
+.carousel-item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 0px;
+
+    backface-visibility: visible;
+    /* box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);*/
+}
+
+.carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    aspect-ratio: 1/1;
+}
+
+.carousel-progress {
+    position: absolute;
+    top: 1.5rem;
+    left: 3rem;
+    transform: translateX(-50%);
+    font-size: 14px;
+    font-weight: 500;
+    /* backdrop-filter: blur(10px);
+    padding: 12px 24px;
+    border-radius: 9999px;
+    color: white;
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.3);
+    */
+}
+
+/* Contenedor */
+.ventana_autoplay {
+    position: absolute;
+    width: 100vw;
+    height: 200vh;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    z-index: 9999;
+    pointer-events: none;
+}
+
+/* Imágenes */
+.ventana_autoplay img {
+    transform: scale(.8);
+    object-fit: contain;
+    max-width: 400px;
+    position: absolute;
+
+    /* Estado inicial: ocultas */
+    opacity: 0;
+    /* Transición suave opcional (si la quitas, el cambio es "seco") */
+}
+
+/* Clase para mostrar la imagen activa */
+.ventana_autoplay img.active {
+    opacity: 1;
+    z-index: 1;
+}
+
+
+/* ==========================================================================
+   12. JUGUETES Y DECORACIÓN (SVG)
+   ========================================================================== */
+.munecos {
+    position: absolute;
+}
+
+.m1 {
+    position: absolute;
+    top: 0;
+    right: 16%;
+    width: 25vw;
+    max-width: 180px;
+}
+
+.m2 {
+    position: absolute;
+    top: 35%;
+    left: 16%;
+    width: 25vw;
+    max-width: 180px;
+}
+
+.toy {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    user-select: none;
+}
+
+
+/* ==========================================================================
+   13. FOOTER
+   ========================================================================== */
+.site-footer {
+    padding: 8rem 3rem;
+    display: flex;
+    justify-content: center;
+    height: auto;
+    align-items: center;
+    font-family: system-ui, -apple-system, sans-serif;
+    color: #333;
+    position: relative;
+    overflow: hidden;
+}
+
+.footer-container {
+    max-width: 600;
+    margin: 0 auto;
+    width: 60%;
+    display: flex;
+
+    /* POR DEFECTO (MÓVIL): Columna (cajas apiladas) */
+    flex-direction: column;
+
+    gap: 1rem;
+    position: relative;
+    z-index: 10;
+}
+
+/* ESTILO DE LAS CAJITAS (IGUAL PARA TODOS) */
+.footer-box {
+    text-transform: uppercase;
+    background-color: gainsboro;
+    padding: 0 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+    transition: box-shadow 0.3s ease;
+
+    /* Asegura que ocupen espacio igual en escritorio */
+    flex: 1;
+}
+
+/* ANIMACIÓN FLUIDA */
+details {
+    interpolate-size: allow-keywords;
+}
+
+::details-content {
+    opacity: 0;
+    block-size: 0;
+    overflow-y: clip;
+    transition: content-visibility 0.3s allow-discrete,
+        opacity 0.3s ease,
+        block-size 0.3s ease;
+}
+
+details[open]::details-content {
+    opacity: 1;
+    block-size: auto;
+}
+
+/* TÍTULO (SUMMARY) */
+.footer-box summary {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: .75rem 0;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1rem;
+    user-select: none;
+}
+
+.footer-box summary::-webkit-details-marker {
+    display: none;
+}
+
+
+/* CONTENIDO INTERNO */
+.box-content {
+    border-top: 1px solid #666;
+    padding-bottom: 1rem;
+    text-transform: none;
+    padding-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.box-content a {
+    text-decoration: none;
+    color: #666;
+    font-size: 0.95rem;
+    transition: color 0.2s;
+    display: block;
+}
+
+.box-content a:hover {
+    color: #000;
+    text-decoration: underline;
+}
+
+/* MEDIA QUERY (SOLO CAMBIA LA POSICIÓN) */
+@media (min-width: 768px) {
+    .footer-container {
+        /* EN PC: Simplemente las ponemos en fila */
+        flex-direction: row;
+        align-items: flex-start;
+        /* Alineadas arriba */
+    }
+
+    /* NOTA: Hemos borrado todo lo que quitaba bordes y fondos.
+       Ahora en PC se verán 3 cajas blancas una al lado de la otra.
+    */
+}
+
+/* TEXTO DE FONDO */
+.footer-inter {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    text-align: center;
+    font-size: 13vw;
+    /* Responsive font size para el fondo */
+    font-weight: 300;
+    color: rgba(255, 255, 255, 1);
+    /* Muy sutil */
+    pointer-events: none;
+    z-index: 1;
+}
+
+.credit {
+    font-size: 1rem;
+    right: 9.2%;
+    font-weight: 300;
+    position: absolute;
+}

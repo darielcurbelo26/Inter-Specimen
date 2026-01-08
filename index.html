@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="es" style="scroll-behavior: smooth;">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Specimen Inter</title>
+
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Favicon base -->
+<link rel="icon" href="assets/favicon.svg" sizes="any">
+
+<!-- Favicon SVG (navegadores modernos) -->
+<link rel="icon" href="assets/favicon/favicon.svg" type="image/svg+xml">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.0/lottie.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/Draggable.min.js"></script>
+
+    <link rel="preconnect" href="https://rsms.me/">
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+
+    <div id="custom-cursor">
+        <span id="cursor-text"></span>
+    </div>
+
+    <div id="mi-carpeta-descargas" class="hide_svg align">
+    </div>
+
+    <script src="folder-widget.js"></script>
+    <script>
+        // Inicialización del widget de carpeta
+        crearCarpeta('#mi-carpeta-descargas');
+    </script>
+
+
+    <div class="nav-bar glass">
+        <ul class="nav-items">
+            <li><a href="#home">Home</a></li>
+            <span class="separator"></span>
+            <li><a href="#about">About</a></li>
+            <span class="separator"></span>
+            <li><a href="#contact">Contact</a></li>
+            <li>
+                <div id="lottie-container"></div>
+            </li>
+        </ul>
+    </div>
+
+
+    <div id="home" class="section overflow-hidden">
+        <div class="container">
+            <div class="header">
+                <h1 class="title-page">The Inter typeface family specimen</h1>
+            </div>
+        </div>
+
+        <div class="pdf-big-file absolute-align hide_svg">
+            <img movimiento-hover-press data-cursor-text="Descargar folleto" src="assets/specimen-pdf-hero.png" alt="Inter typeface specimen" id="download-pdf" data-pdf="assets/specimen-pdf-hero.pdf">
+        </div>
+
+        <script>
+            document.getElementById("download-pdf").addEventListener("click", (e) => {
+                const img = e.currentTarget;
+                const url = img.dataset.pdf;
+                const filename = "Inter-specimen.pdf";
+
+                fetch(url)
+                    .then(res => res.blob())
+                    .then(blob => {
+                        const a = document.createElement("a");
+                        const urlBlob = window.URL.createObjectURL(blob);
+                        a.href = urlBlob;
+                        a.download = filename;
+                        document.body.appendChild(a);
+                        a.click();
+                        a.remove();
+                        window.URL.revokeObjectURL(urlBlob);
+                    })
+                    .catch(err => {
+                        console.error("No se pudo descargar el archivo:", err);
+                    });
+            });
+        </script>
+
+        <div class="bg-big-inter">
+            <div class="inner-big-type">Inter</div>
+            <div class="inner-big-type">Inter</div>
+            <div class="inner-big-type">Inter</div>
+            <div class="inner-big-type">Inter</div>
+        </div>
+    </div>
+
+
+    <div id="about" class="section column empty-6rem-space-bottom">
+        <div class="text-block">
+            <p>Inter es una tipografía versátil y resistente, cuidadosamente diseñada para una amplia variedad de aplicaciones, desde interfaces de usuario detalladas hasta materiales de marketing y señalización. La familia tipográfica Inter incluye más de 2000 glifos que cubren 147 idiomas. Sus pesos van desde un delicado Thin 100 hasta un Heavy 900. Cada glifo cuenta con tres diseños específicos para los pesos 100, 400 y 900, lo que garantiza una excelente calidad en cualquier grosor. Además, ofrece un rango óptico que va de "text" a "display" y una verdadera variante cursiva.</p>
+
+            <p>Con este proyecto de specimen se busca mostrar una visión diferente de la tipografía Inter: cómo una fuente pensada principalmente para proyectos digitales y de interfaz puede funcionar perfectamente en proyectos artísticos, experimentales o editoriales. En este proyecto se abordará Inter como fuente variable, mostrando variaciones de estilo y glifos para resaltar su versatilidad. Aunque este specimen es una versión resumida, estoy seguro de que ayudará a entender y utilizar una fuente como esta de una forma más amplia e incluso diferente.</p>
+        </div>
+    </div>
+
+
+    <div id="glyphs">
+        <div class="preview-panel">
+            <div class="letter">A</div>
+        </div>
+
+        <div class="glyph-list">
+            <div class="content" id="grid"></div>
+        </div>
+    </div>
+
+
+    <div class="section column">
+        <div forzar-intro-stagger class="text-title">(uso decorativo y experimental de símbolos y letras)</div>
+
+        <img movimiento-hover-press-view forzar-intro-stagger src="assets/container-poster.jpg">
+        <img movimiento-hover-press-view forzar-intro-stagger src="assets/poster-orange.png">
+
+        <div class="image-overlay" id="image-overlay">
+            <img src="" alt="Imagen ampliada">
+        </div>
+    </div>
+
+
+    <div class="toy">
+
+        <svg svg-toy class="m1" width="auto" height="auto" viewBox="0 0 421 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <style>
+                /* ================= SVG ANIMATIONS ================= */
+                @keyframes body_m1 {
+                    0% {
+                        transform: rotate(0deg);
+                    }
+
+                    100% {
+                        transform: rotate(-4deg);
+                    }
+                }
+
+                #body_m1 {
+                    transform-box: fill-box;
+                    transform-origin: center 138px;
+                    animation: body_m1 1s linear infinite alternate;
+                    transition: transform 1s ease;
+                }
+
+                @keyframes cabeza_m1 {
+                    0% {
+                        transform: rotate(0deg);
+                    }
+
+                    100% {
+                        transform: rotate(16deg);
+                    }
+                }
+
+                #cabeza_m1 {
+                    transform-box: fill-box;
+                    transform-origin: center bottom;
+                    animation: body_m1 1s linear infinite alternate;
+                    transition: transform 1s ease;
+                }
+
+                /* ================= SVG ANIMATIONS – M2 ================= */
+                /* BODY M2 */
+                @keyframes body_m2 {
+                    0% {
+                        transform: rotate(0deg);
+                    }
+
+                    100% {
+                        transform: rotate(-4deg);
+                    }
+                }
+
+                #body_m2 {
+                    transform-box: fill-box;
+                    transform-origin: center 138px;
+                    animation: body_m2 1s linear infinite alternate;
+                    transition: transform 1s ease;
+                }
+
+                /* CABEZA M2 – Giro 360° con pausa */
+                @keyframes cabeza_m2 {
+                    0% {
+                        transform: rotate(0deg);
+                    }
+
+                    28.57% {
+                        transform: rotate(360deg);
+                    }
+
+                    100% {
+                        transform: rotate(360deg);
+                    }
+                }
+
+                #cabeza_m2 {
+                    transform-box: fill-box;
+                    transform-origin: center center;
+                    animation: cabeza_m2 7s linear infinite;
+                    transition: transform 0.5s ease;
+                }
+            </style>
+
+            <path id="body_m1" d="M277.595 204.019C230.119 233.117 192.597 265.279 124.446 261.45C173.454 301.267 181.111 318.881 107.6 338.023L101.474 308.159L112.96 299.736C70.844 257.621 75.4384 220.865 168.86 225.459L168.86 194.829C70.8438 236.181 66.2495 192.533 127.51 125.912L146.653 148.884C146.653 148.884 127.51 171.855 127.51 175.685C127.51 179.515 160.436 165.732 174.22 151.183C166.497 140.02 161.157 134.808 151.248 125.912L174.22 100.642C189.752 113.638 198.042 121.089 210.976 135.101C210.976 135.101 239.308 107.534 238.542 100.642C237.776 93.7507 195.661 100.642 195.661 100.642L195.661 66.9496C298.27 48.5729 293.676 81.5002 230.119 159.606L225.524 197.893C293.676 145.822 316.648 165.732 307.459 225.459L322.774 217.036L333.494 249.964C256.154 290.548 268.406 278.296 277.595 204.019Z" fill="black" />
+            <path id="cabeza_m1" d="M97.9383 61.9992C95.7088 64.0021 94.1073 66.3305 93.134 68.9843C92.1607 71.6382 92.0179 74.4691 92.7058 77.4772C93.4289 80.4871 95.1592 83.5156 97.8965 86.5627C100.183 89.1081 102.631 91.1227 105.24 92.6065C107.865 94.1089 110.408 95.1824 112.867 95.8269C115.361 96.4734 117.511 96.7919 119.315 96.7824L127.704 89.2464C125.192 88.9173 122.698 88.4389 120.22 87.811C117.759 87.2017 115.37 86.2426 113.052 84.9335C110.751 83.643 108.574 81.8552 106.521 79.5699C104.335 77.1359 103.066 74.9015 102.715 72.8665C102.364 70.8315 102.997 69.088 104.614 67.6359C106.119 66.2839 107.715 65.8565 109.404 66.3537C111.129 66.8528 112.967 68.1893 114.92 70.3631L121.054 77.1911L129.052 70.0056L122.918 63.1776C120.966 61.0037 119.815 59.0497 119.465 57.3155C119.133 55.5998 119.71 54.0744 121.196 52.7391C122.849 51.2536 124.661 50.7846 126.63 51.3322C128.635 51.8817 130.738 53.3827 132.942 55.8352C135.011 58.139 136.565 60.5037 137.602 62.9292C138.64 65.3546 139.339 67.815 139.701 70.3104C140.079 72.8244 140.279 75.3642 140.301 77.9298L148.69 70.3938C148.929 68.5673 148.851 66.3877 148.456 63.8552C148.078 61.3412 147.282 58.6988 146.068 55.9279C144.872 53.1755 143.13 50.5267 140.843 47.9813C138.089 44.9156 135.254 42.8802 132.336 41.8751C129.437 40.8533 126.607 40.6929 123.846 41.394C121.104 42.0784 118.608 43.4304 116.36 45.45C114.261 47.3361 112.865 49.2776 112.175 51.2745C111.52 53.2733 111.404 55.2744 111.827 57.2779C112.286 59.2833 113.11 61.2287 114.3 63.114L115.693 61.8622C113.948 60.4423 112.084 59.414 110.102 58.7773C108.155 58.1425 106.152 58.0617 104.093 58.5351C102.052 58.9918 100.001 60.1465 97.9383 61.9992ZM140.212 84.0532C137.964 86.0728 136.555 88.1108 135.985 90.1673C135.45 92.2256 135.809 93.9515 137.06 95.3449C138.329 96.757 140.023 97.3164 142.144 97.0231C144.283 96.7132 146.476 95.5484 148.724 93.5288L149.616 92.7276L145.986 88.6866L144.648 89.8883C143.83 90.6227 143.1 91.0611 142.455 91.2035C141.828 91.3644 141.305 91.2126 140.888 90.7482C140.437 90.2465 140.327 89.657 140.558 88.9796C140.789 88.3022 141.35 87.5629 142.242 86.7617L142.799 86.261L140.546 83.7528L140.212 84.0532ZM150.973 95.1348C150.155 95.8692 149.529 96.6669 149.094 97.5279C148.677 98.3722 148.358 99.2129 148.136 100.05C147.95 100.889 147.751 101.639 147.538 102.299C147.343 102.979 147.031 103.51 146.604 103.894C146.084 104.362 145.467 104.479 144.755 104.246C144.059 104.032 143.358 103.57 142.653 102.86L138.389 106.691C140.415 108.833 142.445 110.065 144.479 110.386C146.513 110.707 148.329 110.15 149.927 108.715C150.763 107.964 151.372 107.165 151.753 106.319C152.17 105.474 152.48 104.642 152.683 103.822C152.886 103.001 153.094 102.261 153.306 101.6C153.518 100.939 153.847 100.409 154.293 100.008C154.888 99.4741 155.499 99.2946 156.126 99.4697C156.77 99.6633 157.495 100.153 158.302 100.939L162.483 97.1837C160.493 95.0432 158.454 93.8198 156.365 93.5135C154.312 93.209 152.515 93.7495 150.973 95.1348Z" fill="#436781" />
+        </svg>
+
+        <svg svg-toy class="m2" width="auto" height="auto" viewBox="0 0 420 341" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path id="body_m2" d="M208.352 238.537C230.418 272.463 247.116 287.673 275.017 308.616L295.873 280.976C270.304 262.578 257.046 249.534 237.076 216.962C252.086 193.642 258.136 179.873 261.322 153.047C280.094 139.09 314.465 101.171 319.445 88.4905C324.425 75.8104 318.629 63.1815 304.064 58.4876C289.501 53.7945 281.586 55.7753 274.238 57.6143L274.235 57.6151L279.179 39.1615L248.269 36.4171C248.269 36.4171 235.305 57.2427 237.428 71.4869C240.709 93.5007 264.852 84.7121 283.358 86.5063C268.624 105.184 256.648 118.215 238.652 134.315C234.975 94.9772 224.905 38.5044 166.911 68.4146L158.569 46.401L127.736 61.0824C137.951 94.3349 134.299 114.716 182.977 94.0803C185.754 92.903 192.414 90.1668 195.183 95.7685C197.951 101.37 207.953 145.389 196.309 183.095C144.355 199.074 115.054 208.274 79.0321 201.513L69.5384 236.944C124.076 238.976 145.557 232.643 183.071 220.688C172.258 236.42 164.305 244.488 147.781 257.909L165.179 281.558C183.747 267.918 191.701 257.69 208.352 238.537Z" fill="black" />
+            <path id="cabeza_m2" d="M110.584 315.804L118.565 298.976L100.261 302.892L98.4166 290.525L117.021 289.041L104.454 275.243L114.301 267.354L124.986 282.723L130.662 264.984L142.184 269.536L134.264 286.389L152.568 282.472L154.304 294.937L135.76 296.445L148.267 310.219L138.528 318.01L127.844 302.642L122.107 320.356L110.584 315.804Z" fill="#E2A14F" />
+        </svg>
+
+    </div>
+
+
+    <div class="section column">
+        <div class="text-block">
+            <p class="font-12pt"> <span class="h4-falso">(castellano)</span> <br><br>
+                <span class="orange">Inter Variable</span> es una tipografía moderna que aprovecha el poder de las fuentes variables, permitiendo ajustar suavemente el peso, la inclinación y el tamaño óptico en un solo archivo. Gracias a sus ejes wght, slnt y opsz, los diseñadores pueden controlar con precisión la apariencia del texto: desde un trazo fino y elegante hasta uno fuerte y audaz, con variaciones continuas entre ambos. Esto no solo ofrece flexibilidad visual y coherencia tipográfica, sino también mejor rendimiento web, al reducir la carga de múltiples archivos de fuente.
+                <br><br>
+                <span class="font-size-sub">font size: 12pt</span>
+            </p>
+        </div>
+
+        <div class="text-block">
+            <p class="font-8pt"><span class="h4-falso">(chino)</span> <br><br>
+                英特可变字体（Inter Variable） 是一款现代化的字体，它充分利用了 可变字体（Variable Font） 的强大功能，只需一个字体文件，就能平滑地调节字重、倾斜度和光学尺寸。 通过其 wght、slnt 和 opsz 三个可变轴，设计师可以精确地控制文字的外观：从纤细优雅到厚重醒目，过渡自然流畅。 这种设计不仅提供了 视觉上的灵活性 和 排版上的一致性，还通过减少字体文件数量，实现了 更高的网页性能。
+                <br><br>
+                <span class="font-size-sub">font size: 8pt</span>
+            </p>
+        </div>
+
+        <div class="text-block">
+            <p class="font-10pt"> <span class="h4-falso">(árabe)</span> <br><br>
+                إنتر فاريابل (Inter Variable) هي خط حديث يستفيد بالكامل من قوة الخطوط المتغيرة (Variable Fonts)، حيث يمكن من خلال ملف واحد فقط تعديل وزن الحروف، وميلها، وحجمها البصري بسلاسة. ومن خلال المحاور المتغيرة wght و slnt و opsz، يستطيع المصممون التحكم بدقة في مظهر النص — من الخطوط الرفيعة والأنيقة إلى السميكة والجريئة، مع انتقالات سلسة بينهما. يوفر هذا التصميم مرونة بصرية واتساقاً طباعياً، كما يحسّن أداء الويب بفضل تقليل عدد ملفات الخطوط المطلوبة.
+                <br><br>
+                <span class="font-size-sub">font size: 10pt</span>
+            </p>
+
+            <p><span class="h4-falso">(griego)</span> <br><br>
+                Ίντερ Βάριεϊμπλ (Inter Variable) είναι μια σύγχρονη γραμματοσειρά που αξιοποιεί πλήρως τη δύναμη των μεταβλητών γραμματοσειρών (Variable Fonts), επιτρέποντας την ομαλή ρύθμιση του πάχους, της κλίσης και του οπτικού μεγέθους μέσα από ένα μόνο αρχείο γραμματοσειράς. Μέσω των αξόνων wght, slnt και opsz, οι σχεδιαστές μπορούν να ελέγχουν με ακρίβεια την εμφάνιση του κειμένου — από λεπτές και κομψές μορφές έως έντονες και δυναμικές, με ομαλές μεταβάσεις μεταξύ τους. Αυτός ο σχεδιασμός προσφέρει οπτική ευελιξία και τυπογραφική συνέπεια, ενώ βελτιώνει την απόδοση του ιστού μειώνοντας τον αριθμό των αρχείων γραμματοσειρών που απαιτούνται.
+                <br><br>
+                <span class="font-size-sub">font size: 12pt</span>
+            </p>
+        </div>
+
+        <div class="text-block">
+            <p><span class="h4-falso">(georgiano)</span> <br><br>
+                ინტერ ვარიეიბლი (Inter Variable) არის თანამედროვე შრიფტი, რომელიც სრულად იყენებს ცვლადი ფონტების შესაძლებლობებს. იგი საშუალებას იძლევა ერთ ფაილში გლუვად მოირგოს შრიფტის სიმძიმე, დახრა და ოპტიკური ზომა. მისი ღერძების — wght, slnt და opsz — მეშვეობით დიზაინერებს შეუძლიათ ტექსტის გარეგნობის ზუსტად კონტროლი: თხელი და ელეგანტური ხაზიდან ძლიერი და გამოკვეთილამდე, უწყვეტი გარდამავლობით შორის. ეს არა მხოლოდ ვიზუალურ მოქნილობასა და ტიპოგრაფიულ თანმიმდევრულობას უზრუნველყოფს, არამედ აუმჯობესებს ვებ-წარმადობასაც, რადგან ამცირებს მრავალ შრიფტის ფაილის ჩატვირთვის საჭიროებას.
+                <br><br>
+                <span class="font-size-sub">font size: 12pt</span>
+            </p>
+        </div>
+    </div>
+
+
+    <div class="language-support-container">
+        <div class="language_title"> <span style="font-size: 1.5rem; line-height: 120%; text-decoration: underline; font-weight: 600">Language support </span><br>
+            Inter currently covers 147 scripts
+        </div>
+        <br>
+        <div class="language">Latin</div>
+        <div class="language">Afrikaans</div>
+        <div class="language">Aghem</div>
+        <div class="language">Akan</div>
+        <div class="language">Albanian</div>
+        <div class="language">Asturian</div>
+        <div class="language">Asu</div>
+        <div class="language">Bafia</div>
+        <div class="language">Basaa</div>
+        <div class="language">Basque</div>
+        <div class="language">Bemba</div>
+        <div class="language">Bena</div>
+        <div class="language">Breton</div>
+        <div class="language">Catalan</div>
+        <div class="language">Chiga</div>
+        <div class="language">Colognian</div>
+        <div class="language">Cornish</div>
+        <div class="language">Croatian</div>
+        <div class="language">Czech</div>
+        <div class="language">Danish</div>
+        <div class="language">Duala</div>
+        <div class="language">Dutch</div>
+        <div class="language">Elfdalian</div>
+        <div class="language">Embu</div>
+        <div class="language">English</div>
+        <div class="language">Esperanto</div>
+        <div class="language">Estonian</div>
+        <div class="language">Ewe</div>
+        <div class="language">Ewondo</div>
+        <div class="language">Faroese</div>
+        <div class="language">Filipino</div>
+        <div class="language">Finnish</div>
+        <div class="language">French</div>
+        <div class="language">Friulian</div>
+        <div class="language">Fulah</div>
+        <div class="language">Galician</div>
+        <div class="language">Ganda</div>
+        <div class="language">German</div>
+        <div class="language">Gusii</div>
+        <div class="language">Hawaiian</div>
+        <div class="language">Hungarian</div>
+        <div class="language">Icelandic</div>
+        <div class="language">Igbo</div>
+        <div class="language">Inari Sami</div>
+        <div class="language">Indonesian</div>
+        <div class="language">Irish</div>
+        <div class="language">Italian</div>
+        <div class="language">Jola-Fonyi</div>
+        <div class="language">Kabuverdianu</div>
+        <div class="language">Kabyle</div>
+        <div class="language">Kako</div>
+        <div class="language">Kalaallisut</div>
+        <div class="language">Kalenjin</div>
+        <div class="language">Kamba</div>
+        <div class="language">Kikuyu</div>
+        <div class="language">Kinyarwanda</div>
+        <div class="language">Koyra Chiini</div>
+        <div class="language">Koyraboro Senni</div>
+        <div class="language">Kwasio</div>
+        <div class="language">Lakota</div>
+        <div class="language">Langi</div>
+        <div class="language">Latvian</div>
+        <div class="language">Lingala</div>
+        <div class="language">Lithuanian</div>
+        <div class="language">Lower Sorbian</div>
+        <div class="language">Luba-Katanga</div>
+        <div class="language">Luo</div>
+        <div class="language">Luxembourgish</div>
+        <div class="language">Luyia</div>
+        <div class="language">Machame</div>
+        <div class="language">Makhuwa-Meetto</div>
+        <div class="language">Makonde</div>
+        <div class="language">Malagasy</div>
+        <div class="language">Maltese</div>
+        <div class="language">Manx</div>
+        <div class="language">Māori</div>
+        <div class="language">Masai</div>
+        <div class="language">Meru</div>
+        <div class="language">Metaʼ</div>
+        <div class="language">Morisyen</div>
+        <div class="language">Mundang</div>
+        <div class="language">Nama</div>
+        <div class="language">Ngiemboon</div>
+        <div class="language">Ngomba</div>
+        <div class="language">North Ndebele</div>
+        <div class="language">Northern Sami</div>
+        <div class="language">Norwegian Bokmål</div>
+        <div class="language">Norwegian Nynorsk</div>
+        <div class="language">Nuer</div>
+        <div class="language">Nyankole</div>
+        <div class="language">Oromo</div>
+        <div class="language">Polish</div>
+        <div class="language">Portuguese</div>
+        <div class="language">Prussian</div>
+        <div class="language">Quechua</div>
+        <div class="language">Romanian</div>
+        <div class="language">Romansh</div>
+        <div class="language">Rombo</div>
+        <div class="language">Rundi</div>
+        <div class="language">Rwa</div>
+        <div class="language">Samburu</div>
+        <div class="language">Sango</div>
+        <div class="language">Sangu</div>
+        <div class="language">Scottish Gaelic</div>
+        <div class="language">Sena</div>
+        <div class="language">Serbian</div>
+        <div class="language">Shambala</div>
+        <div class="language">Shona</div>
+        <div class="language">Slovak</div>
+        <div class="language">Slovenian</div>
+        <div class="language">Soga</div>
+        <div class="language">Somali</div>
+        <div class="language">Spanish</div>
+        <div class="language">Swahili</div>
+        <div class="language">Swedish</div>
+        <div class="language">Swiss German</div>
+        <div class="language">Tachelhit</div>
+        <div class="language">Taita</div>
+        <div class="language">Tasawaq</div>
+        <div class="language">Teso</div>
+        <div class="language">Tongan</div>
+        <div class="language">Turkish</div>
+        <div class="language">Upper Sorbian</div>
+        <div class="language">Uzbek</div>
+        <div class="language">Vai</div>
+        <div class="language">Vietnamese</div>
+        <div class="language">Volapük</div>
+        <div class="language">Vunjo</div>
+        <div class="language">Walser</div>
+        <div class="language">Welsh</div>
+        <div class="language">Western Frisian</div>
+        <div class="language">Yangben</div>
+        <div class="language">Yoruba</div>
+        <div class="language">Zarma</div>
+        <div class="language">Zulu</div>
+    </div>
+
+
+    <div class="carousel-container" id="carouselContainer">
+
+        <div class="ventana_autoplay">
+            <img src="assets/autoplay/01.png">
+            <img src="assets/autoplay/02.png">
+            <img src="assets/autoplay/03.png">
+            <img src="assets/autoplay/04.png">
+        </div>
+
+        <div class="carousel-sticky">
+            <div class="carousel-scene" id="carouselScene">
+                <div class="carousel-3d" id="carousel3d">
+                </div>
+            </div>
+            <div class="carousel-progress">
+                <span id="progressText">wght=0</span>
+            </div>
+        </div>
+    </div>
+
+
+    <style>
+        /* Aplicamos esto solo dentro de nuestro contenedor para no afectar al resto de la web */
+        #type-specimen-root {
+            font-family: 'Inter Variable', sans-serif;
+            font-feature-settings: 'liga'1, 'calt'1;
+        }
+
+        #type-specimen-root .slider::-webkit-slider-thumb {
+            appearance: none;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #a3a3a3;
+            cursor: pointer;
+        }
+
+        #type-specimen-root .slider::-moz-range-thumb {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #a3a3a3;
+            cursor: pointer;
+            border: none;
+        }
+    </style>
+
+    <section forzar-intro-stagger class="w-full h-[100vh] bg-neutral-950 relative border border-neutral-800">
+        <div id="type-specimen-root" class="w-full h-full"></div>
+    </section>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+        const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+
+        function TypeSpecimenApp() {
+            const [weight, setWeight] = useState(400);
+            const [opsz, setOpsz] = useState(32);
+            const [letterIndex, setLetterIndex] = useState(0);
+            const [showDetails, setShowDetails] = useState(true);
+            const [isLowercase, setIsLowercase] = useState(false);
+            const [isDragging, setIsDragging] = useState(false);
+            const [touchStartX, setTouchStartX] = useState(0);
+            const containerRef = useRef(null);
+
+            const currentLetter = isLowercase 
+                ? ALPHABET[letterIndex].toLowerCase() 
+                : ALPHABET[letterIndex];
+
+            const handleInteraction = (clientY) => {
+                if (!containerRef.current) return;
+                const rect = containerRef.current.getBoundingClientRect();
+                
+                // Calculamos la posición relativa dentro del contenedor, no de la pantalla
+                // Limitamos y entre 0 y height para evitar valores fuera de rango al arrastrar fuera
+                const relativeY = Math.max(0, Math.min(rect.height, clientY - rect.top));
+                const y = relativeY / rect.height;
+                
+                // Vertical: weight (100-900)
+                const newWeight = 100 + (1 - y) * 800;
+                setWeight(Math.max(100, Math.min(900, Math.round(newWeight))));
+            };
+
+            const handleMouseDown = (e) => {
+                setIsDragging(true);
+                handleInteraction(e.clientY);
+            };
+
+            const handleMouseMove = (e) => {
+                if (!isDragging) return;
+                handleInteraction(e.clientY);
+            };
+
+            const handleMouseUp = () => {
+                setIsDragging(false);
+            };
+
+            const handleTouchStart = (e) => {
+                setIsDragging(true);
+                setTouchStartX(e.touches[0].clientX);
+                handleInteraction(e.touches[0].clientY);
+            };
+
+            const handleTouchMove = (e) => {
+                if (!isDragging) return;
+                // Prevenir el scroll de la página mientras se interactúa con el touch
+                if(e.cancelable) e.preventDefault();
+                handleInteraction(e.touches[0].clientY);
+            };
+
+            const handleTouchEnd = (e) => {
+                const touchEndX = e.changedTouches[0].clientX;
+                const diff = touchStartX - touchEndX;
+                
+                if (Math.abs(diff) > 50) {
+                    if (diff > 0) {
+                        setLetterIndex((prev) => (prev + 1) % ALPHABET.length);
+                    } else {
+                        setLetterIndex((prev) => (prev - 1 + ALPHABET.length) % ALPHABET.length);
+                    }
+                }
+                setIsDragging(false);
+            };
+
+            // Listeners globales de teclado
+            useEffect(() => {
+                const handleKeyDown = (e) => {
+                    // Solo actuar si el foco no está en un input/textarea de la página principal
+                    if (['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
+
+                    const key = e.key.toUpperCase();
+                    
+                    if (e.key === 'ArrowLeft') {
+                        e.preventDefault(); // Prevenir scroll horizontal de la web
+                        setLetterIndex((prev) => (prev - 1 + ALPHABET.length) % ALPHABET.length);
+                        return;
+                    }
+                    if (e.key === 'ArrowRight') {
+                        e.preventDefault();
+                        setLetterIndex((prev) => (prev + 1) % ALPHABET.length);
+                        return;
+                    }
+                    
+                    const index = ALPHABET.indexOf(key);
+                    if (index !== -1) {
+                        setLetterIndex(index);
+                    }
+                    
+                    if (key === 'D') setShowDetails(prev => !prev);
+                    if (key === 'L') setIsLowercase(prev => !prev);
+                };
+
+                window.addEventListener('keydown', handleKeyDown);
+                return () => window.removeEventListener('keydown', handleKeyDown);
+            }, []);
+
+            const fontVariationSettings = `'wght' ${weight}, 'opsz' ${opsz}`;
+            const fontSize = 50; 
+            const upm = 2816;
+            
+            const metrics = {
+                ascender: 2728,
+                descender: -680,
+                capHeight: 2048,
+                xHeight: 1536,
+            };
+            
+            const totalHeight = metrics.ascender + Math.abs(metrics.descender); 
+            const baselineFromTop = (metrics.ascender / totalHeight) * fontSize;
+            
+            // Cálculo de líneas base
+            const baselineTop = `calc(50% - ${fontSize/2.285}vmin + ${baselineFromTop}vmin)`;
+            const capHeightTop = `calc(50% - ${fontSize/2.265}vmin + ${baselineFromTop - (metrics.capHeight / upm) * fontSize}vmin)`;
+            const xHeightTop = `calc(50% - ${fontSize/2.45}vmin + ${baselineFromTop - (metrics.xHeight / upm) * fontSize}vmin)`;
+            const ascenderTop = `calc(50% - ${fontSize/1.8}vmin)`;
+            const descenderTop = `calc(50% - ${fontSize/2.45}vmin + ${baselineFromTop + (Math.abs(metrics.descender) / upm) * fontSize}vmin)`;
+
+            return (
+                /* CAMBIO AQUÍ: relative w-full h-full en lugar de fixed inset-0 */
+                <div className="relative w-full h-full bg-neutral-950 overflow-hidden select-none flex flex-col">
+                    
+                    {/* Toolbar */}
+                    <div className="flex flex-wrap items-center justify-between px-6 py-3 border-b border-neutral-800/50 gap-2">
+                        <div className="flex items-center gap-4">
+                            <div className="font-mono text-xs text-neutral-600">
+                                wght: <span className="text-neutral-400">{weight}</span>
+                            </div>
+                            <div className="font-mono text-xs text-neutral-600">
+                                opsz: <span className="text-neutral-400">{opsz}</span>
+                            </div>
+                        </div>
+
+                        <div className="flex items-center gap-4">
+                            <input
+                                type="range"
+                                value={opsz}
+                                min="14"
+                                max="32"
+                                step="0.1"
+                                onChange={(e) => setOpsz(Number(e.target.value))}
+                                className="w-24 h-1 bg-neutral-800 rounded-lg appearance-none cursor-pointer slider"
+                            />
+                            <label className="flex items-center gap-2 text-xs text-neutral-500 cursor-pointer hover:text-neutral-400">
+                                <input
+                                    type="checkbox"
+                                    checked={showDetails}
+                                    onChange={(e) => setShowDetails(e.target.checked)}
+                                    className="w-3 h-3 accent-neutral-500"
+                                />
+                                Details
+                            </label>
+                            <label className="flex items-center gap-2 text-xs text-neutral-500 cursor-pointer hover:text-neutral-400">
+                                <input
+                                    type="checkbox"
+                                    checked={isLowercase}
+                                    onChange={(e) => setIsLowercase(e.target.checked)}
+                                    className="w-3 h-3 accent-neutral-500"
+                                />
+                                Lowercase
+                            </label>
+                        </div>
+
+                        <div className="font-mono text-xs text-neutral-600 hidden sm:block">
+                            {currentLetter} · U+{(currentLetter.charCodeAt(0)).toString(16).toUpperCase().padStart(4, '0')}
+                        </div>
+                    </div>
+
+                    {/* Canvas principal */}
+                    <div 
+                        ref={containerRef}
+                        className="flex-1 relative cursor-ns-resize overflow-hidden touch-none"
+                        onMouseDown={handleMouseDown}
+                        onMouseMove={handleMouseMove}
+                        onMouseUp={handleMouseUp}
+                        onMouseLeave={handleMouseUp}
+                        onTouchStart={handleTouchStart}
+                        onTouchMove={handleTouchMove}
+                        onTouchEnd={handleTouchEnd}
+                    >
+                        {/* Grid de fondo */}
+                        <div 
+                            className="absolute inset-0 pointer-events-none opacity-5"
+                            style={{
+                                backgroundImage: 'linear-gradient(#525252 1px, transparent 1px), linear-gradient(90deg, #525252 1px, transparent 1px)',
+                                backgroundSize: '50px 50px'
+                            }}
+                        />
+
+                        {/* Guías tipográficas */}
+                        {showDetails && (
+                            <div className="absolute inset-0 pointer-events-none">
+                                <div className="absolute left-0 right-0 border-t border-dashed border-neutral-700" style={{ top: ascenderTop }}>
+                                    <span className="absolute left-4 -top-4 text-[9px] text-neutral-600 font-mono">ASCENDER</span>
+                                </div>
+                                <div className="absolute left-0 right-0 border-t border-dashed border-neutral-700" style={{ top: capHeightTop }}>
+                                    <span className="absolute left-4 -top-4 text-[9px] text-neutral-600 font-mono">CAP HEIGHT</span>
+                                </div>
+                                <div className="absolute left-0 right-0 border-t border-dashed border-neutral-700" style={{ top: xHeightTop }}>
+                                    <span className="absolute left-4 -top-4 text-[9px] text-neutral-600 font-mono">X-HEIGHT</span>
+                                </div>
+                                <div className="absolute left-0 right-0 border-t border-neutral-500" style={{ top: baselineTop }}>
+                                    <span className="absolute left-4 top-1 text-[9px] text-neutral-400 font-mono">BASELINE</span>
+                                </div>
+                                <div className="absolute left-0 right-0 border-t border-dashed border-neutral-700" style={{ top: descenderTop }}>
+                                    <span className="absolute left-4 top-1 text-[9px] text-neutral-600 font-mono">DESCENDER</span>
+                                </div>
+                            </div>
+                        )}
+
+                        {/* Letra principal */}
+                        <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
+                            <span
+                                style={{
+                                    fontFamily: 'Inter Variable, sans-serif',
+                                    fontVariationSettings,
+                                    color: '#e5e5e5',
+                                    fontSize: '50vmin', /* Nota: vmin se basa en la pantalla, no en el contenedor. */
+                                    lineHeight: 1,
+                                }}
+                            >
+                                {currentLetter}
+                            </span>
+                        </div>
+
+                        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 pointer-events-none">
+                            <div className="flex items-center gap-2 text-neutral-700 font-mono text-xs">
+                                <span>←</span>
+                                <span className="text-neutral-500">{letterIndex + 1}/{ALPHABET.length}</span>
+                                <span>→</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Footer */}
+                    <div className="flex items-center justify-between px-6 py-3 border-t border-neutral-800/50">
+                        <div className="font-mono text-xs text-neutral-700 hidden sm:block">
+                            {isDragging ? '↕ DRAGGING' : '↕ DRAG · ← → ARROWS'}
+                        </div>
+                        
+                        <div className="flex gap-1 overflow-x-auto pb-1 sm:pb-0 scrollbar-hide w-full sm:w-auto justify-center">
+                            {ALPHABET.map((letter, index) => (
+                                <button
+                                    key={letter}
+                                    onClick={() => setLetterIndex(index)}
+                                    className={`w-5 h-5 flex-shrink-0 text-[9px] font-mono transition-colors ${
+                                        index === letterIndex 
+                                            ? 'text-neutral-300 bg-neutral-800' 
+                                            : 'text-neutral-700 hover:text-neutral-500'
+                                    }`}
+                                >
+                                    {letter}
+                                </button>
+                            ))}
+                        </div>
+
+                        <div className="font-mono text-xs text-neutral-700 hidden sm:block">
+                            INTER
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        // Renderizar en el ID específico
+        const rootElement = document.getElementById('type-specimen-root');
+        if (rootElement) {
+            const root = ReactDOM.createRoot(rootElement);
+            root.render(<TypeSpecimenApp />);
+        }
+    </script>
+
+
+    <footer id="contact" class="site-footer">
+        <div class="footer-inter">
+            Inter Specimen <br>
+           <span class="credit"> by Dariel Curbelo </span>
+        </div>
+        <div class="footer-container">
+
+            <details class="footer-box" name="footer-group">
+                <summary>
+                    <span> <strong>GOOGLE FONTS</strong></span>
+                </summary>
+                <div class="box-content">
+                    Inter is a variable font family carefully crafted & designed for computer screens.
+                    Inter features a tall x-height to aid in readability of mixed-case and lower-case text. Several OpenType features are provided as well, like contextual alternates that adjusts punctuation depending on the shape of surrounding glyphs, slashed zero for when you need to disambiguate "0" from "o", tabular numbers, etc.
+                    The Inter project is led by Rasmus Andersson, a Swedish maker–of–software living in San Francisco. To contribute, see github.com/rsms/inter
+
+                    <a href="#"> https://fonts.google.com/specimen/Inter ↗</a>
+
+                </div>
+            </details>
+
+            <details class="footer-box" name="footer-group">
+                <summary>
+                    <span> <strong>FAQ</strong></span>
+                </summary>
+                <div class="box-content">
+
+                    <a href="#">How do I enable and disable font features?</a>
+
+                    <a href="#">I've made a cool thing that uses Inter</a>
+
+                    <a href="#">How reliable are the fonts served from rsms.me/inter?</a>
+                    <a href="#">This website claims work started in 2016, but the git repository's log says it started later?</a>
+                    <a href="#">Can I change what OpenType features are enabled by default?</a>
+
+
+                    <a href="#">I miss something from the old website</a>
+
+
+
+
+                </div>
+            </details>
+
+            <details class="footer-box" name="footer-group">
+                <summary>
+                    <span> <strong>Info</strong></span>
+                </summary>
+                <div class="box-content">
+                    Inter is a trademark of Rasmus Andersson (RSMS)
+                </div>
+            </details>
+
+        </div>
+    </footer>
+
+
+    <script src="glyph-inspector.js"></script>
+    <script src="script.js"></script>
+
+</body></html>

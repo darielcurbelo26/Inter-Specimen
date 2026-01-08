@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inter Variable Type Specimen</title>
+  
+  <!-- Inter Variable Font -->
+  <link rel="preconnect" href="https://rsms.me/">
+  <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Inter Variable', sans-serif;
+      font-feature-settings: 'liga' 1, 'calt' 1;
+    }
+    
+    @supports (font-variation-settings: normal) {
+      body {
+        font-family: 'Inter Variable', sans-serif;
+      }
+    }
+    
+    .slider::-webkit-slider-thumb {
+      appearance: none;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #a3a3a3;
+      cursor: pointer;
+    }
+
+    .slider::-moz-range-thumb {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #a3a3a3;
+      cursor: pointer;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <!-- React and ReactDOM -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  
+  <!-- Babel Standalone for JSX -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <script type="text/babel">
+    const { useState, useEffect, useRef } = React;
+
+    const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+
+    function App() {
+      const [weight, setWeight] = useState(400);
+      const [opsz, setOpsz] = useState(32);
+      const [letterIndex, setLetterIndex] = useState(0);
+      const [showDetails, setShowDetails] = useState(true);
+      const [isLowercase, setIsLowercase] = useState(false);
+      const [isDragging, setIsDragging] = useState(false);
+      const [touchStartX, setTouchStartX] = useState(0);
+      const containerRef = useRef(null);
+
+      const currentLetter = isLowercase 
+        ? ALPHABET[letterIndex].toLowerCase() 
+        : ALPHABET[letterIndex];
+
+      const handleInteraction = (clientY) => {
+        if (!containerRef.current) return;
+        const rect = containerRef.current.getBoundingClientRect();
+        const y = (clientY - rect.top) / rect.height;
+        
+        // Vertical: weight (100-900)
+        const newWeight = 100 + (1 - y) * 800;
+        setWeight(Math.max(100, Math.min(900, Math.round(newWeight))));
+      };
+
+      const handleMouseDown = (e) => {
+        setIsDragging(true);
+        handleInteraction(e.clientY);
+      };
+
+      const handleMouseMove = (e) => {
+        if (!isDragging) return;
+        handleInteraction(e.clientY);
+      };
+
+      const handleMouseUp = () => {
+        setIsDragging(false);
+      };
+
+      const handleTouchStart = (e) => {
+        setIsDragging(true);
+        setTouchStartX(e.touches[0].clientX);
+        handleInteraction(e.touches[0].clientY);
+      };
+
+      const handleTouchMove = (e) => {
+        if (!isDragging) return;
+        handleInteraction(e.touches[0].clientY);
+      };
+
+      const handleTouchEnd = (e) => {
+        const touchEndX = e.changedTouches[0].clientX;
+        const diff = touchStartX - touchEndX;
+        
+        // Swipe horizontal para cambiar letra
+        if (Math.abs(diff) > 50) {
+          if (diff > 0) {
+            // Swipe left - siguiente letra
+            setLetterIndex((prev) => (prev + 1) % ALPHABET.length);
+          } else {
+            // Swipe right - letra anterior
+            setLetterIndex((prev) => (prev - 1 + ALPHABET.length) % ALPHABET.length);
+          }
+        }
+        
+        setIsDragging(false);
+      };
+
+      // Navegación por teclado
+      useEffect(() => {
+        const handleKeyDown = (e) => {
+          const key = e.key.toUpperCase();
+          
+          // Flechas
+          if (e.key === 'ArrowLeft') {
+            setLetterIndex((prev) => (prev - 1 + ALPHABET.length) % ALPHABET.length);
+            return;
+          }
+          if (e.key === 'ArrowRight') {
+            setLetterIndex((prev) => (prev + 1) % ALPHABET.length);
+            return;
+          }
+          
+          // Letra directa
+          const index = ALPHABET.indexOf(key);
+          if (index !== -1) {
+            setLetterIndex(index);
+          }
+          
+          // Tecla D para toggle details
+          if (key === 'D') {
+            setShowDetails(prev => !prev);
+          }
+          
+          // Tecla L para toggle lowercase
+          if (key === 'L') {
+            setIsLowercase(prev => !prev);
+          }
+        };
+
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+      }, []);
+
+      const fontVariationSettings = `'wght' ${weight}, 'opsz' ${opsz}`;
+
+      // Métricas de Inter Variable oficiales
+      // UPM (Units Per Em) = 2816
+      const fontSize = 50; // en vmin
+      const upm = 2816;
+      
+      // Métricas oficiales de Inter
+      const metrics = {
+        ascender: 2728,      // Altura del ascender
+        descender: -680,     // Profundidad del descender (negativo)
+        capHeight: 2048,     // Altura de las mayúsculas
+        xHeight: 1536,       // Altura de la x minúscula
+      };
+      
+      // Altura total de la caja de la fuente
+      const totalHeight = metrics.ascender + Math.abs(metrics.descender); // 3408
+      
+      // El baseline está a una distancia del top = ascender / totalHeight
+      // Para Inter: 2728 / 3408 = 80.05% desde el top
+      const baselineFromTop = (metrics.ascender / totalHeight) * fontSize;
+      
+      // Como la letra está centrada verticalmente en el viewport (50%)
+      // necesitamos calcular desde ese centro
+      const baselineTop = `calc(50% - ${fontSize/2.285}vmin + ${baselineFromTop}vmin)`;
+      const capHeightTop = `calc(50% - ${fontSize/2.265}vmin + ${baselineFromTop - (metrics.capHeight / upm) * fontSize}vmin)`;
+      const xHeightTop = `calc(50% - ${fontSize/2.45}vmin + ${baselineFromTop - (metrics.xHeight / upm) * fontSize}vmin)`;
+      const ascenderTop = `calc(50% - ${fontSize/1.8}vmin)`;
+      const descenderTop = `calc(50% - ${fontSize/2.45}vmin + ${baselineFromTop + (Math.abs(metrics.descender) / upm) * fontSize}vmin)`;
+
+      return (
+        <div className="fixed inset-0 bg-neutral-950 overflow-hidden select-none flex flex-col">
+          {/* Toolbar simplificado */}
+          <div className="flex items-center justify-between px-6 py-3 border-b border-neutral-800/50">
+            <div className="flex items-center gap-4">
+              <div className="font-mono text-xs text-neutral-600">
+                wght: <span className="text-neutral-400">{weight}</span>
+              </div>
+              <div className="font-mono text-xs text-neutral-600">
+                opsz: <span className="text-neutral-400">{opsz}</span>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-4">
+              <input
+                type="range"
+                value={opsz}
+                min="14"
+                max="32"
+                step="0.1"
+                onChange={(e) => setOpsz(Number(e.target.value))}
+                className="w-24 h-1 bg-neutral-800 rounded-lg appearance-none cursor-pointer slider"
+              />
+              <label className="flex items-center gap-2 text-xs text-neutral-500 cursor-pointer hover:text-neutral-400">
+                <input
+                  type="checkbox"
+                  checked={showDetails}
+                  onChange={(e) => setShowDetails(e.target.checked)}
+                  className="w-3 h-3"
+                />
+                Details
+              </label>
+              <label className="flex items-center gap-2 text-xs text-neutral-500 cursor-pointer hover:text-neutral-400">
+                <input
+                  type="checkbox"
+                  checked={isLowercase}
+                  onChange={(e) => setIsLowercase(e.target.checked)}
+                  className="w-3 h-3"
+                />
+                Lowercase
+              </label>
+            </div>
+
+            <div className="font-mono text-xs text-neutral-600">
+              {currentLetter} · U+{(currentLetter.charCodeAt(0)).toString(16).toUpperCase().padStart(4, '0')}
+            </div>
+          </div>
+
+          {/* Canvas principal */}
+          <div 
+            ref={containerRef}
+            className="flex-1 relative cursor-ns-resize overflow-hidden"
+            onMouseDown={handleMouseDown}
+            onMouseMove={handleMouseMove}
+            onMouseUp={handleMouseUp}
+            onMouseLeave={handleMouseUp}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+          >
+            {/* Grid de fondo */}
+            <div 
+              className="absolute inset-0 pointer-events-none opacity-5"
+              style={{
+                backgroundImage: 'linear-gradient(#525252 1px, transparent 1px), linear-gradient(90deg, #525252 1px, transparent 1px)',
+                backgroundSize: '50px 50px'
+              }}
+            />
+
+            {/* Guías tipográficas */}
+            {showDetails && (
+              <div className="absolute inset-0 pointer-events-none">
+                {/* Ascender */}
+                <div className="absolute left-0 right-0 border-t border-dashed border-neutral-700" style={{ top: ascenderTop }}>
+                  <span className="absolute left-4 -top-4 text-[9px] text-neutral-600 font-mono">ASCENDER</span>
+                </div>
+                {/* Cap Height */}
+                <div className="absolute left-0 right-0 border-t border-dashed border-neutral-700" style={{ top: capHeightTop }}>
+                  <span className="absolute left-4 -top-4 text-[9px] text-neutral-600 font-mono">CAP HEIGHT</span>
+                </div>
+                {/* X-Height */}
+                <div className="absolute left-0 right-0 border-t border-dashed border-neutral-700" style={{ top: xHeightTop }}>
+                  <span className="absolute left-4 -top-4 text-[9px] text-neutral-600 font-mono">X-HEIGHT</span>
+                </div>
+                {/* Baseline */}
+                <div className="absolute left-0 right-0 border-t border-neutral-500" style={{ top: baselineTop }}>
+                  <span className="absolute left-4 top-1 text-[9px] text-neutral-400 font-mono">BASELINE</span>
+                </div>
+                {/* Descender */}
+                <div className="absolute left-0 right-0 border-t border-dashed border-neutral-700" style={{ top: descenderTop }}>
+                  <span className="absolute left-4 top-1 text-[9px] text-neutral-600 font-mono">DESCENDER</span>
+                </div>
+              </div>
+            )}
+
+            {/* Letra principal */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <span
+                style={{
+                  fontFamily: 'Inter Variable, sans-serif',
+                  fontVariationSettings,
+                  color: '#e5e5e5',
+                  fontSize: '50vmin',
+                  lineHeight: 1,
+                }}
+              >
+                {currentLetter}
+              </span>
+            </div>
+
+            {/* Indicador de letra */}
+            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 pointer-events-none">
+              <div className="flex items-center gap-2 text-neutral-700 font-mono text-xs">
+                <span>←</span>
+                <span className="text-neutral-500">{letterIndex + 1}/{ALPHABET.length}</span>
+                <span>→</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Footer */}
+          <div className="flex items-center justify-between px-6 py-3 border-t border-neutral-800/50">
+            <div className="font-mono text-xs text-neutral-700">
+              {isDragging ? '↕ DRAGGING' : '↕ DRAG · ← → ARROWS OR SWIPE'}
+            </div>
+            
+            <div className="flex gap-1">
+              {ALPHABET.map((letter, index) => (
+                <button
+                  key={letter}
+                  onClick={() => setLetterIndex(index)}
+                  className={`w-5 h-5 text-[9px] font-mono transition-colors ${
+                    index === letterIndex 
+                      ? 'text-neutral-300 bg-neutral-800' 
+                      : 'text-neutral-700 hover:text-neutral-500'
+                  }`}
+                >
+                  {letter}
+                </button>
+              ))}
+            </div>
+
+            <div className="font-mono text-xs text-neutral-700">
+              INTER VARIABLE
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    // Render the app
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>
