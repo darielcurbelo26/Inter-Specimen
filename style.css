@@ -251,14 +251,15 @@ h1 {
 
 @media (max-width: 768px) {
     .bg-big-inter {
- display: none;
+        display: none;
 
     }
-    .nav-bar {
-    bottom: 6rem;
-    left: 50%;
 
-}
+    .nav-bar {
+        bottom: 3rem;
+        left: 50%;
+
+    }
 }
 
 .nav-items {
@@ -312,9 +313,9 @@ h1 {
 /* 📱 Mobile */
 @media (max-width: 768px) {
     #mi-carpeta-descargas {
-    left: 16%;
-    top: 16%;
-    transform: scale(1)
+        left: 16%;
+        top: 16%;
+        transform: scale(1)
     }
 }
 
@@ -478,8 +479,10 @@ h1 {
 
 /* 📱 Mobile */
 @media (max-width: 768px) {
-    #cursor-text, #custom-cursor {
-    display: none !important;
+
+    #cursor-text,
+    #custom-cursor {
+        display: none !important;
     }
 }
 
@@ -548,7 +551,7 @@ h1 {
     .language {
         padding: 0 25% 0 25%;
     }
-    
+
     .language-support-container {
         padding-bottom: 0;
     }
@@ -556,15 +559,15 @@ h1 {
     .language_title {
         width: 100%;
         height: auto;
-        padding: 0% 25% 5% 25%!important;
+        padding: 0% 25% 5% 25% !important;
         display: inline-block;
     }
-    
+
     .section {
         padding: 0 1rem 0 1rem;
-        
+
     }
-    
+
 
 }
 
@@ -755,7 +758,7 @@ h1 {
     justify-content: center;
     height: auto;
     align-items: center;
-    font-family: system-ui, -apple-system, sans-serif;
+    font-family: Inter, sans-serif;
     color: #333;
     position: relative;
     overflow: hidden;
@@ -833,6 +836,8 @@ details[open]::details-content {
     display: flex;
     flex-direction: column;
     gap: 0.8rem;
+    overflow-wrap: break-word;
+
 }
 
 .box-content a {
@@ -857,9 +862,7 @@ details[open]::details-content {
         /* Alineadas arriba */
     }
 
-    /* NOTA: Hemos borrado todo lo que quitaba bordes y fondos.
-       Ahora en PC se verán 3 cajas blancas una al lado de la otra.
-    */
+
 }
 
 /* TEXTO DE FONDO */
@@ -894,6 +897,6 @@ details[open]::details-content {
 /* 📱 Mobile */
 @media (max-width: 768px) {
     #tester {
-    display: none !important;
+        display: none !important;
     }
 }
