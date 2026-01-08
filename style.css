@@ -863,13 +863,12 @@ details[open]::details-content {
   transition: transform 0.3s ease;
 }
 
-/* estado movido */
-[barra-menu].menu-up {
+/* BAJA 3% */
+[barra-menu].menu-down {
   transform: translateY(3%);
 }
 
-/* estado normal */
-[barra-menu].menu-down {
-  transform: translateY(-6%);
+/* SUBE 3% */
+[barra-menu].menu-up {
+  transform: translateY(-3%);
 }
-
