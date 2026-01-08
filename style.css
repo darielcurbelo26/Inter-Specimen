@@ -251,7 +251,7 @@ h1 {
     }
 
     .nav-bar {
-        bottom: 2rem;
+        bottom: 1rem;
         left: 50%;
     }
 }
@@ -865,11 +865,11 @@ details[open]::details-content {
 
 /* estado movido */
 [barra-menu].menu-up {
-  transform: translateY(-3%);
+  transform: translateY(3%);
 }
 
 /* estado normal */
 [barra-menu].menu-down {
-  transform: translateY(3%);
+  transform: translateY(-3%);
 }
 
