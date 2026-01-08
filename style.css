@@ -865,10 +865,10 @@ details[open]::details-content {
 
 /* BAJA 3% */
 [barra-menu].menu-down {
-  transform: translateY(3%);
+  transform: translateY(-3%);
 }
 
 /* SUBE 3% */
 [barra-menu].menu-up {
-  transform: translateY(-3%);
+  transform: translateY(6%);
 }
