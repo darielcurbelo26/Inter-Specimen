@@ -899,4 +899,9 @@ details[open]::details-content {
     #tester {
         visbility: hidden !important;
     }
+
+       .bg-neutral-950 {
+       display: none !important;
+    }
+
 }
