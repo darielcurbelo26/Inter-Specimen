@@ -897,6 +897,6 @@ details[open]::details-content {
 /* 📱 Mobile */
 @media (max-width: 768px) {
     #tester {
-        display: none !important;
+        visbility: hidden !important;
     }
 }
