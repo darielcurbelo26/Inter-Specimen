@@ -4,7 +4,7 @@
 :root {
     /* Inter font settings */
     font-family: Inter, sans-serif;
-    font-feature-settings: 'liga'1, 'calt'1;
+    font-feature-settings: 'liga' 1, 'calt' 1;
 
     /* Glyph Inspector - Colores */
     --bg-color: #fff;
@@ -47,10 +47,7 @@
     line-height: .9;
     letter-spacing: -.05em;
     user-select: none;
-    /* Corregido: faltaba punto y coma */
 }
-
-html {}
 
 body {
     overflow-x: hidden;
@@ -126,7 +123,6 @@ h1 {
 .header {
     display: flex;
     align-items: flex-start;
-    width: 100vw;
     justify-content: flex-start;
     width: 100%;
     height: fit-content;
@@ -252,13 +248,11 @@ h1 {
 @media (max-width: 768px) {
     .bg-big-inter {
         display: none;
-
     }
 
     .nav-bar {
         bottom: 3rem;
         left: 50%;
-
     }
 }
 
@@ -406,7 +400,7 @@ h1 {
         width: 100%;
         padding-bottom: 2rem;
         height: auto;
-        border-bottom: none solid var(--border-color);
+        border-bottom: 1px solid var(--border-color); /* Corregido: sintaxis de borde inválida */
     }
 
     .preview-panel .letter {
@@ -479,7 +473,6 @@ h1 {
 
 /* 📱 Mobile */
 @media (max-width: 768px) {
-
     #cursor-text,
     #custom-cursor {
         display: none !important;
@@ -535,7 +528,6 @@ h1 {
     justify-content: center;
     overflow: hidden;
     padding-bottom: 4rem;
-
 }
 
 .language {
@@ -565,10 +557,7 @@ h1 {
 
     .section {
         padding: 0 1rem 0 1rem;
-
     }
-
-
 }
 
 .language_title {
@@ -582,9 +571,7 @@ h1 {
 .language:hover {
     background-color: red;
     border-top: 1px solid #000;
-    /* Arriba */
     border-bottom: 1px solid #000;
-    /* Abajo */
 }
 
 
@@ -596,7 +583,6 @@ h1 {
     height: 350svh;
     width: 100%;
     overflow: visible;
-    /* desktop */
 }
 
 /* 📱 Mobile */
@@ -607,23 +593,14 @@ h1 {
 }
 
 .carousel-sticky {
-    /* 3. LA CÁMARA FIJA: Se pega al techo */
     position: sticky;
     position: -webkit-sticky;
-    /* Para Safari */
     top: 0;
-
-    /* 4. ALTURA: Ocupa toda la pantalla para centrar el 3D */
     height: 100vh;
-
     width: 100%;
-
-    /* Centrado del contenido */
     display: flex;
     align-items: center;
     justify-content: center;
-
-    /* Permite ver el 3D si se sale un poco de los bordes */
     overflow: visible;
 }
 
@@ -639,7 +616,6 @@ h1 {
 
 .carousel-item img {
     object-fit: fill;
-    /* <--- LA CLAVE: Ajusta sin recortar */
     display: block;
 }
 
@@ -658,9 +634,7 @@ h1 {
     width: 100%;
     height: 100%;
     border-radius: 0px;
-
     backface-visibility: visible;
-    /* box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);*/
 }
 
 .carousel-item img {
@@ -678,13 +652,6 @@ h1 {
     transform: translateX(-50%);
     font-size: 14px;
     font-weight: 500;
-    /* backdrop-filter: blur(10px);
-    padding: 12px 24px;
-    border-radius: 9999px;
-    color: white;
-    z-index: 10;
-    background: rgba(0, 0, 0, 0.3);
-    */
 }
 
 /* Contenedor */
@@ -705,10 +672,7 @@ h1 {
     object-fit: contain;
     max-width: 400px;
     position: absolute;
-
-    /* Estado inicial: ocultas */
     opacity: 0;
-    /* Transición suave opcional (si la quitas, el cambio es "seco") */
 }
 
 /* Clase para mostrar la imagen activa */
@@ -769,24 +733,19 @@ h1 {
     margin: 0 auto;
     width: 60%;
     display: flex;
-
-    /* POR DEFECTO (MÓVIL): Columna (cajas apiladas) */
     flex-direction: column;
-
     gap: 1rem;
     position: relative;
     z-index: 10;
 }
 
-/* ESTILO DE LAS CAJITAS (IGUAL PARA TODOS) */
+/* ESTILO DE LAS CAJITAS */
 .footer-box {
     text-transform: uppercase;
     background-color: gainsboro;
     padding: 0 1rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
     transition: box-shadow 0.3s ease;
-
-    /* Asegura que ocupen espacio igual en escritorio */
     flex: 1;
 }
 
@@ -826,7 +785,6 @@ details[open]::details-content {
     display: none;
 }
 
-
 /* CONTENIDO INTERNO */
 .box-content {
     border-top: 1px solid #666;
@@ -837,7 +795,6 @@ details[open]::details-content {
     flex-direction: column;
     gap: 0.8rem;
     overflow-wrap: break-word;
-
 }
 
 .box-content a {
@@ -853,16 +810,12 @@ details[open]::details-content {
     text-decoration: underline;
 }
 
-/* MEDIA QUERY (SOLO CAMBIA LA POSICIÓN) */
+/* MEDIA QUERY */
 @media (min-width: 768px) {
     .footer-container {
-        /* EN PC: Simplemente las ponemos en fila */
         flex-direction: row;
         align-items: flex-start;
-        /* Alineadas arriba */
     }
-
-
 }
 
 /* TEXTO DE FONDO */
@@ -874,10 +827,8 @@ details[open]::details-content {
     width: 100%;
     text-align: center;
     font-size: 13vw;
-    /* Responsive font size para el fondo */
     font-weight: 300;
     color: rgba(255, 255, 255, 1);
-    /* Muy sutil */
     pointer-events: none;
     z-index: 1;
 }
@@ -894,14 +845,16 @@ details[open]::details-content {
     left: 0;
 }
 
-/* 📱 Mobile */
+/* ==========================================================================
+   14. ELEMENTOS OCULTOS EN MÓVIL (CORREGIDO)
+   ========================================================================== */
 @media (max-width: 768px) {
     #tester {
-        visbility: hidden !important;
+        /* Corrección: antes decía "visbility" */
+        visibility: hidden !important;
     }
 
-       .bg-neutral-950 {
-       display: none !important;
+    .bg-neutral-950 {
+        display: none !important;
     }
-
 }
