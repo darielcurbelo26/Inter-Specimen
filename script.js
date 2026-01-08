@@ -467,7 +467,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const menu = document.querySelector("[barra-menu]");
   if (!menu) return;
 
-  // solo mobile
+  // SOLO MOBILE
   if (window.innerWidth > 768) return;
 
   let hasScrolled = false;
@@ -475,18 +475,19 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("scroll", () => {
     const scrollTop = window.scrollY;
 
-    // primer scroll hacia abajo
+    // PRIMER SCROLL → BAJA
     if (scrollTop > 0 && !hasScrolled) {
-      menu.classList.add("menu-up");
-      menu.classList.remove("menu-down");
+      menu.classList.add("menu-down");
+      menu.classList.remove("menu-up");
       hasScrolled = true;
     }
 
-    // vuelve al tope
+    // VUELVE AL TOPE → SUBE
     if (scrollTop === 0) {
-      menu.classList.remove("menu-up");
-      menu.classList.add("menu-down");
+      menu.classList.add("menu-up");
+      menu.classList.remove("menu-down");
       hasScrolled = false;
     }
   });
 });
+
