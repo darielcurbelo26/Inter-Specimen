@@ -858,3 +858,18 @@ details[open]::details-content {
         display: none !important;
     }
 }
+
+[barra-menu] {
+  transition: transform 0.3s ease;
+}
+
+/* estado movido */
+[barra-menu].menu-up {
+  transform: translateY(-3%);
+}
+
+/* estado normal */
+[barra-menu].menu-down {
+  transform: translateY(3%);
+}
+
