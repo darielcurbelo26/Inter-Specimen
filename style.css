@@ -251,9 +251,14 @@ h1 {
 
 @media (max-width: 768px) {
     .bg-big-inter {
- visibility: hidden;
+ display: none;
 
     }
+    .nav-bar {
+    bottom: 6rem;
+    left: 50%;
+
+}
 }
 
 .nav-items {
@@ -307,7 +312,7 @@ h1 {
 /* 📱 Mobile */
 @media (max-width: 768px) {
     #mi-carpeta-descargas {
-    left: 4%;
+    left: 16%;
     top: 16%;
     transform: scale(1)
     }
@@ -526,6 +531,8 @@ h1 {
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    padding-bottom: 4rem;
+
 }
 
 .language {
@@ -541,6 +548,10 @@ h1 {
     .language {
         padding: 0 25% 0 25%;
     }
+    
+    .language-support-container {
+        padding-bottom: 0;
+    }
 
     .language_title {
         width: 100%;
@@ -549,10 +560,12 @@ h1 {
         display: inline-block;
     }
     
-    .language-support-container {
-        padding-bottom: 4rem;
+    .section {
+        padding: 0 1rem 0 1rem;
+        
+    }
+    
 
-}
 }
 
 .language_title {
@@ -876,4 +889,11 @@ details[open]::details-content {
 .navBar {
     position: fixed;
     left: 0;
+}
+
+/* 📱 Mobile */
+@media (max-width: 768px) {
+    #tester {
+    display: none !important;
+    }
 }
