@@ -48,7 +48,6 @@
     letter-spacing: -.05em;
     user-select: none;
     /* Corregido: faltaba punto y coma */
-    box-sizing: border-box;
 }
 
 html {}
