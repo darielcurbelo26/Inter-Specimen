@@ -870,6 +870,6 @@ details[open]::details-content {
 
 /* estado normal */
 [barra-menu].menu-down {
-  transform: translateY(-3%);
+  transform: translateY(-6%);
 }
 
