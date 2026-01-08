@@ -250,6 +250,13 @@ h1 {
     z-index: 9999;
 }
 
+@media (max-width: 768px) {
+    .bg-big-inter {
+ visibility: hidden;
+
+    }
+}
+
 .nav-items {
     list-style: none;
     padding: 0;
@@ -298,6 +305,14 @@ h1 {
     z-index: 8888;
 }
 
+/* 📱 Mobile */
+@media (max-width: 768px) {
+    #mi-carpeta-descargas {
+    left: 4%;
+    top: 16%;
+    transform: scale(1)
+    }
+}
 
 /* ==========================================================================
    8. GLYPH INSPECTOR COMPONENT
@@ -457,6 +472,13 @@ h1 {
     display: block;
 }
 
+/* 📱 Mobile */
+@media (max-width: 768px) {
+    #cursor-text, #custom-cursor {
+    display: none !important;
+    }
+}
+
 [data-cursor-text]:hover {
     cursor: none;
 }
@@ -515,6 +537,25 @@ h1 {
     transition: background-color 0s ease, color 0.1s ease;
 }
 
+/* 📱 Mobile */
+@media (max-width: 768px) {
+    .language {
+        padding: 0 25% 0 25%;
+    }
+
+    .language_title {
+        width: 100%;
+        height: auto;
+        padding: 0% 25% 5% 25%!important;
+        display: inline-block;
+    }
+    
+    .language-support-container {
+        padding-bottom: 4rem;
+
+}
+}
+
 .language_title {
     width: 100%;
     height: auto;
@@ -535,17 +576,19 @@ h1 {
 /* ==========================================================================
    11. CARRUSEL 3D
    ========================================================================== */
+
 .carousel-container {
-    position: relative;
-    /* align-items: top; <- Esto no es CSS válido, se borra */
-
-    /* 1. EL CARRIL: Tiene que ser alto para tener recorrido */
-    height: 350vh;
-
+    height: 350svh;
     width: 100%;
-
-    /* 2. EL CULPABLE: NUNCA pongas overflow:hidden aquí si usas sticky dentro */
     overflow: visible;
+    /* desktop */
+}
+
+/* 📱 Mobile */
+@media (max-width: 768px) {
+    .carousel-container {
+        display: none;
+    }
 }
 
 .carousel-sticky {
@@ -829,4 +872,9 @@ details[open]::details-content {
     right: 9.2%;
     font-weight: 300;
     position: absolute;
+}
+
+.navBar {
+    position: fixed;
+    left: 0;
 }
