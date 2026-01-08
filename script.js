@@ -458,3 +458,35 @@ languageElements.forEach(el => {
         el.style.backgroundColor = '';
     });
 });
+
+/* ==========================================================================
+   7. BARRA MENU MOBILE
+   ========================================================================== */
+
+document.addEventListener("DOMContentLoaded", () => {
+  const menu = document.querySelector("[barra-menu]");
+  if (!menu) return;
+
+  // solo mobile
+  if (window.innerWidth > 768) return;
+
+  let hasScrolled = false;
+
+  window.addEventListener("scroll", () => {
+    const scrollTop = window.scrollY;
+
+    // primer scroll hacia abajo
+    if (scrollTop > 0 && !hasScrolled) {
+      menu.classList.add("menu-up");
+      menu.classList.remove("menu-down");
+      hasScrolled = true;
+    }
+
+    // vuelve al tope
+    if (scrollTop === 0) {
+      menu.classList.remove("menu-up");
+      menu.classList.add("menu-down");
+      hasScrolled = false;
+    }
+  });
+});
