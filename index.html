@@ -7,45 +7,78 @@
     <title>Specimen Inter</title>
 
     <link rel="stylesheet" href="style.css">
-    
-    <!-- Favicon base -->
-<link rel="icon" href="assets/favicon.svg" sizes="any">
 
-<!-- Favicon SVG (navegadores modernos) -->
-<link rel="icon" href="assets/favicon/favicon.svg" type="image/svg+xml">
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.0/lottie.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/Draggable.min.js"></script>
+    <link rel="icon" href="assets/favicon.svg" sizes="any">
+    <link rel="icon" href="assets/favicon/favicon.svg" type="image/svg+xml">
 
     <link rel="preconnect" href="https://rsms.me/">
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 
     <script src="https://cdn.tailwindcss.com"></script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.0/lottie.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/Draggable.min.js"></script>
+    
+    <script src="https://unpkg.com/lucide@latest"></script>
+
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <style>
+        #type-specimen-root {
+            font-family: 'Inter Variable', sans-serif;
+            font-feature-settings: 'liga' 1, 'calt' 1; /* Espacios añadidos */
+        }
+        #type-specimen-root .slider::-webkit-slider-thumb {
+            appearance: none;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #a3a3a3;
+            cursor: pointer;
+        }
+        #type-specimen-root .slider::-moz-range-thumb {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #a3a3a3;
+            cursor: pointer;
+            border: none;
+        }
+        /* Clase para ocultar scroll mientras carga */
+        body.is-loading {
+            overflow: hidden !important;
+            height: 100vh;
+        }
+    </style>
 </head>
 
-<body>
+<body class="is-loading">
+
+    <div class="loading-main-container" id="loadingContainer">
+        <div class="loading-asterisk-wrapper">
+            <div class="loading-bars-container">
+                <div class="loading-bar loading-bar-0" id="bar0"></div>
+                <div class="loading-bar loading-bar-1" id="bar1"></div>
+                <div class="loading-bar loading-bar-2" id="bar2"></div>
+                <div class="loading-bar loading-bar-main" id="bar3">
+                    <p class="loading-button-text" id="buttonText">Comenzar</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div id="custom-cursor">
         <span id="cursor-text"></span>
     </div>
 
-    <div id="mi-carpeta-descargas" class="hide_svg align">
-    </div>
-
-    <script src="folder-widget.js"></script>
-    <script>
-        // Inicialización del widget de carpeta
-        crearCarpeta('#mi-carpeta-descargas');
-    </script>
+    <div id="mi-carpeta-descargas" class="hide_svg align"></div>
 
 
-    <div class="nav-bar glass">
+    <nav class="nav-bar glass">
         <ul class="nav-items">
             <li><a href="#home">Home</a></li>
             <span class="separator"></span>
@@ -56,7 +89,7 @@
                 <div id="lottie-container"></div>
             </li>
         </ul>
-    </div>
+    </nav>
 
 
     <div id="home" class="section overflow-hidden">
@@ -69,30 +102,6 @@
         <div class="pdf-big-file absolute-align hide_svg">
             <img movimiento-hover-press data-cursor-text="Descargar folleto" src="assets/specimen-pdf-hero.png" alt="Inter typeface specimen" id="download-pdf" data-pdf="assets/specimen-pdf-hero.pdf">
         </div>
-
-        <script>
-            document.getElementById("download-pdf").addEventListener("click", (e) => {
-                const img = e.currentTarget;
-                const url = img.dataset.pdf;
-                const filename = "Inter-specimen.pdf";
-
-                fetch(url)
-                    .then(res => res.blob())
-                    .then(blob => {
-                        const a = document.createElement("a");
-                        const urlBlob = window.URL.createObjectURL(blob);
-                        a.href = urlBlob;
-                        a.download = filename;
-                        document.body.appendChild(a);
-                        a.click();
-                        a.remove();
-                        window.URL.revokeObjectURL(urlBlob);
-                    })
-                    .catch(err => {
-                        console.error("No se pudo descargar el archivo:", err);
-                    });
-            });
-        </script>
 
         <div class="bg-big-inter">
             <div class="inner-big-type">Inter</div>
@@ -136,95 +145,27 @@
 
 
     <div class="toy">
-
         <svg svg-toy class="m1" width="auto" height="auto" viewBox="0 0 421 400" fill="none" xmlns="http://www.w3.org/2000/svg">
             <style>
-                /* ================= SVG ANIMATIONS ================= */
-                @keyframes body_m1 {
-                    0% {
-                        transform: rotate(0deg);
-                    }
-
-                    100% {
-                        transform: rotate(-4deg);
-                    }
-                }
-
-                #body_m1 {
-                    transform-box: fill-box;
-                    transform-origin: center 138px;
-                    animation: body_m1 1s linear infinite alternate;
-                    transition: transform 1s ease;
-                }
-
-                @keyframes cabeza_m1 {
-                    0% {
-                        transform: rotate(0deg);
-                    }
-
-                    100% {
-                        transform: rotate(16deg);
-                    }
-                }
-
-                #cabeza_m1 {
-                    transform-box: fill-box;
-                    transform-origin: center bottom;
-                    animation: body_m1 1s linear infinite alternate;
-                    transition: transform 1s ease;
-                }
-
-                /* ================= SVG ANIMATIONS – M2 ================= */
-                /* BODY M2 */
-                @keyframes body_m2 {
-                    0% {
-                        transform: rotate(0deg);
-                    }
-
-                    100% {
-                        transform: rotate(-4deg);
-                    }
-                }
-
-                #body_m2 {
-                    transform-box: fill-box;
-                    transform-origin: center 138px;
-                    animation: body_m2 1s linear infinite alternate;
-                    transition: transform 1s ease;
-                }
-
-                /* CABEZA M2 – Giro 360° con pausa */
-                @keyframes cabeza_m2 {
-                    0% {
-                        transform: rotate(0deg);
-                    }
-
-                    28.57% {
-                        transform: rotate(360deg);
-                    }
-
-                    100% {
-                        transform: rotate(360deg);
-                    }
-                }
-
-                #cabeza_m2 {
-                    transform-box: fill-box;
-                    transform-origin: center center;
-                    animation: cabeza_m2 7s linear infinite;
-                    transition: transform 0.5s ease;
-                }
+                @keyframes body_m1 { 0% { transform: rotate(0deg); } 100% { transform: rotate(-4deg); } }
+                #body_m1 { transform-box: fill-box; transform-origin: center 138px; animation: body_m1 1s linear infinite alternate; transition: transform 1s ease; }
+                @keyframes cabeza_m1 { 0% { transform: rotate(0deg); } 100% { transform: rotate(16deg); } }
+                #cabeza_m1 { transform-box: fill-box; transform-origin: center bottom; animation: body_m1 1s linear infinite alternate; transition: transform 1s ease; }
             </style>
-
             <path id="body_m1" d="M277.595 204.019C230.119 233.117 192.597 265.279 124.446 261.45C173.454 301.267 181.111 318.881 107.6 338.023L101.474 308.159L112.96 299.736C70.844 257.621 75.4384 220.865 168.86 225.459L168.86 194.829C70.8438 236.181 66.2495 192.533 127.51 125.912L146.653 148.884C146.653 148.884 127.51 171.855 127.51 175.685C127.51 179.515 160.436 165.732 174.22 151.183C166.497 140.02 161.157 134.808 151.248 125.912L174.22 100.642C189.752 113.638 198.042 121.089 210.976 135.101C210.976 135.101 239.308 107.534 238.542 100.642C237.776 93.7507 195.661 100.642 195.661 100.642L195.661 66.9496C298.27 48.5729 293.676 81.5002 230.119 159.606L225.524 197.893C293.676 145.822 316.648 165.732 307.459 225.459L322.774 217.036L333.494 249.964C256.154 290.548 268.406 278.296 277.595 204.019Z" fill="black" />
             <path id="cabeza_m1" d="M97.9383 61.9992C95.7088 64.0021 94.1073 66.3305 93.134 68.9843C92.1607 71.6382 92.0179 74.4691 92.7058 77.4772C93.4289 80.4871 95.1592 83.5156 97.8965 86.5627C100.183 89.1081 102.631 91.1227 105.24 92.6065C107.865 94.1089 110.408 95.1824 112.867 95.8269C115.361 96.4734 117.511 96.7919 119.315 96.7824L127.704 89.2464C125.192 88.9173 122.698 88.4389 120.22 87.811C117.759 87.2017 115.37 86.2426 113.052 84.9335C110.751 83.643 108.574 81.8552 106.521 79.5699C104.335 77.1359 103.066 74.9015 102.715 72.8665C102.364 70.8315 102.997 69.088 104.614 67.6359C106.119 66.2839 107.715 65.8565 109.404 66.3537C111.129 66.8528 112.967 68.1893 114.92 70.3631L121.054 77.1911L129.052 70.0056L122.918 63.1776C120.966 61.0037 119.815 59.0497 119.465 57.3155C119.133 55.5998 119.71 54.0744 121.196 52.7391C122.849 51.2536 124.661 50.7846 126.63 51.3322C128.635 51.8817 130.738 53.3827 132.942 55.8352C135.011 58.139 136.565 60.5037 137.602 62.9292C138.64 65.3546 139.339 67.815 139.701 70.3104C140.079 72.8244 140.279 75.3642 140.301 77.9298L148.69 70.3938C148.929 68.5673 148.851 66.3877 148.456 63.8552C148.078 61.3412 147.282 58.6988 146.068 55.9279C144.872 53.1755 143.13 50.5267 140.843 47.9813C138.089 44.9156 135.254 42.8802 132.336 41.8751C129.437 40.8533 126.607 40.6929 123.846 41.394C121.104 42.0784 118.608 43.4304 116.36 45.45C114.261 47.3361 112.865 49.2776 112.175 51.2745C111.52 53.2733 111.404 55.2744 111.827 57.2779C112.286 59.2833 113.11 61.2287 114.3 63.114L115.693 61.8622C113.948 60.4423 112.084 59.414 110.102 58.7773C108.155 58.1425 106.152 58.0617 104.093 58.5351C102.052 58.9918 100.001 60.1465 97.9383 61.9992ZM140.212 84.0532C137.964 86.0728 136.555 88.1108 135.985 90.1673C135.45 92.2256 135.809 93.9515 137.06 95.3449C138.329 96.757 140.023 97.3164 142.144 97.0231C144.283 96.7132 146.476 95.5484 148.724 93.5288L149.616 92.7276L145.986 88.6866L144.648 89.8883C143.83 90.6227 143.1 91.0611 142.455 91.2035C141.828 91.3644 141.305 91.2126 140.888 90.7482C140.437 90.2465 140.327 89.657 140.558 88.9796C140.789 88.3022 141.35 87.5629 142.242 86.7617L142.799 86.261L140.546 83.7528L140.212 84.0532ZM150.973 95.1348C150.155 95.8692 149.529 96.6669 149.094 97.5279C148.677 98.3722 148.358 99.2129 148.136 100.05C147.95 100.889 147.751 101.639 147.538 102.299C147.343 102.979 147.031 103.51 146.604 103.894C146.084 104.362 145.467 104.479 144.755 104.246C144.059 104.032 143.358 103.57 142.653 102.86L138.389 106.691C140.415 108.833 142.445 110.065 144.479 110.386C146.513 110.707 148.329 110.15 149.927 108.715C150.763 107.964 151.372 107.165 151.753 106.319C152.17 105.474 152.48 104.642 152.683 103.822C152.886 103.001 153.094 102.261 153.306 101.6C153.518 100.939 153.847 100.409 154.293 100.008C154.888 99.4741 155.499 99.2946 156.126 99.4697C156.77 99.6633 157.495 100.153 158.302 100.939L162.483 97.1837C160.493 95.0432 158.454 93.8198 156.365 93.5135C154.312 93.209 152.515 93.7495 150.973 95.1348Z" fill="#436781" />
         </svg>
 
         <svg svg-toy class="m2" width="auto" height="auto" viewBox="0 0 420 341" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <style>
+                @keyframes body_m2 { 0% { transform: rotate(0deg); } 100% { transform: rotate(-4deg); } }
+                #body_m2 { transform-box: fill-box; transform-origin: center 138px; animation: body_m2 1s linear infinite alternate; transition: transform 1s ease; }
+                @keyframes cabeza_m2 { 0% { transform: rotate(0deg); } 28.57% { transform: rotate(360deg); } 100% { transform: rotate(360deg); } }
+                #cabeza_m2 { transform-box: fill-box; transform-origin: center center; animation: cabeza_m2 7s linear infinite; transition: transform 0.5s ease; }
+            </style>
             <path id="body_m2" d="M208.352 238.537C230.418 272.463 247.116 287.673 275.017 308.616L295.873 280.976C270.304 262.578 257.046 249.534 237.076 216.962C252.086 193.642 258.136 179.873 261.322 153.047C280.094 139.09 314.465 101.171 319.445 88.4905C324.425 75.8104 318.629 63.1815 304.064 58.4876C289.501 53.7945 281.586 55.7753 274.238 57.6143L274.235 57.6151L279.179 39.1615L248.269 36.4171C248.269 36.4171 235.305 57.2427 237.428 71.4869C240.709 93.5007 264.852 84.7121 283.358 86.5063C268.624 105.184 256.648 118.215 238.652 134.315C234.975 94.9772 224.905 38.5044 166.911 68.4146L158.569 46.401L127.736 61.0824C137.951 94.3349 134.299 114.716 182.977 94.0803C185.754 92.903 192.414 90.1668 195.183 95.7685C197.951 101.37 207.953 145.389 196.309 183.095C144.355 199.074 115.054 208.274 79.0321 201.513L69.5384 236.944C124.076 238.976 145.557 232.643 183.071 220.688C172.258 236.42 164.305 244.488 147.781 257.909L165.179 281.558C183.747 267.918 191.701 257.69 208.352 238.537Z" fill="black" />
             <path id="cabeza_m2" d="M110.584 315.804L118.565 298.976L100.261 302.892L98.4166 290.525L117.021 289.041L104.454 275.243L114.301 267.354L124.986 282.723L130.662 264.984L142.184 269.536L134.264 286.389L152.568 282.472L154.304 294.937L135.76 296.445L148.267 310.219L138.528 318.01L127.844 302.642L122.107 320.356L110.584 315.804Z" fill="#E2A14F" />
         </svg>
-
     </div>
 
 
@@ -412,6 +353,112 @@
     </div>
 
 
+    <div class="tt-container" id="typeTester">
+        <div class="tt-header-section">
+            <div class="tt-header-inner">
+                <div class="tt-header">
+                    <div class="tt-header-left">
+                        <h1 class="tt-title">Type Tester</h1>
+                        <button class="tt-expand-btn" id="expandBtn" aria-label="Expand">
+                            <i data-lucide="maximize-2" style="width: 16px; height: 16px;"></i>
+                        </button>
+                    </div>
+                    <button class="tt-info-btn" id="infoBtn">
+                        <span>Info</span>
+                        <i data-lucide="chevron-down" style="width: 12px; height: 12px;"></i>
+                    </button>
+                </div>
+
+                <div class="tt-info-panel" id="infoPanel">
+                    <div class="tt-info-overflow">
+                        <div class="tt-info-content">
+                            <div class="tt-info-inner">
+                                <p class="tt-info-label">HTML:</p>
+                                <pre class="tt-code-block">&lt;!-- HTML in your document's head --&gt;
+&lt;link rel="preconnect" href="https://rsms.me/"&gt;
+&lt;link rel="stylesheet" href="https://rsms.me/inter/inter.css"&gt;</pre>
+                                
+                                <p class="tt-info-label tt-info-label-spaced">CSS:</p>
+                                <pre class="tt-code-block">:root {
+  font-family: Inter, sans-serif;
+  font-feature-settings: 'liga' 1, 'calt' 1;
+}
+@supports (font-variation-settings: normal) {
+  :root { font-family: InterVariable, sans-serif; }
+}</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tt-controls-wrapper">
+                    <div class="tt-controls-overflow">
+                        <div class="tt-controls-grid">
+                            <div class="tt-control">
+                                <div class="tt-control-header">
+                                    <label class="tt-control-label">Weight</label>
+                                    <span class="tt-control-value" id="weightValue">400</span>
+                                </div>
+                                <div class="tt-slider-track">
+                                    <input type="range" min="100" max="900" step="1" value="400" class="tt-slider" id="weightSlider">
+                                </div>
+                            </div>
+
+                            <div class="tt-control">
+                                <div class="tt-control-header">
+                                    <label class="tt-control-label">Optical Size</label>
+                                    <span class="tt-control-value" id="opszValue">24.0</span>
+                                </div>
+                                <div class="tt-slider-track">
+                                    <input type="range" min="14" max="32" step="0.1" value="24" class="tt-slider" id="opszSlider">
+                                </div>
+                            </div>
+
+                            <div class="tt-control">
+                                <div class="tt-control-header">
+                                    <span class="tt-control-label">Size</span>
+                                    <span class="tt-control-value" id="sizeValue">40px</span>
+                                </div>
+                                <div class="tt-slider-track">
+                                    <input type="range" min="16" max="320" step="1" value="40" class="tt-slider" id="sizeSlider">
+                                </div>
+                            </div>
+
+                            <div class="tt-control">
+                                <div class="tt-style-buttons">
+                                    <button class="tt-style-btn tt-style-btn-active" id="normalBtn">Normal</button>
+                                    <button class="tt-style-btn" id="italicBtn">Italic</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tt-display-wrapper">
+            <div class="tt-display-overflow">
+                <div class="tt-display" id="displayArea">
+                    <div class="tt-text" id="textArea" contenteditable="true" spellcheck="false">escribe algo aquí</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tt-footer-wrapper">
+            <div class="tt-footer-overflow">
+                <div class="tt-footer">
+                    <div class="tt-footer-inner">
+                        <span class="tt-footer-item">wght: <span id="footerWeight">400</span></span>
+                        <span class="tt-footer-item">opsz: <span id="footerOpsz">24.0</span></span>
+                        <span class="tt-footer-item">style: <span id="footerStyle">normal</span></span>
+                        <span class="tt-footer-item">size: <span id="footerSize">40</span>px</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <div class="carousel-container" id="carouselContainer">
 
         <div class="ventana_autoplay">
@@ -433,321 +480,15 @@
     </div>
 
 
-    <style>
-        /* Aplicamos esto solo dentro de nuestro contenedor para no afectar al resto de la web */
-        #type-specimen-root {
-            font-family: 'Inter Variable', sans-serif;
-            font-feature-settings: 'liga'1, 'calt'1;
-        }
-
-        #type-specimen-root .slider::-webkit-slider-thumb {
-            appearance: none;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: #a3a3a3;
-            cursor: pointer;
-        }
-
-        #type-specimen-root .slider::-moz-range-thumb {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: #a3a3a3;
-            cursor: pointer;
-            border: none;
-        }
-    </style>
-
-    <section forzar-intro-stagger class="w-full h-[100vh] bg-neutral-950 relative border border-neutral-800">
+    <section forzar-intro-stagger id="tester" class="w-full h-[100vh] bg-neutral-950 relative border border-neutral-800">
         <div id="type-specimen-root" class="w-full h-full"></div>
     </section>
-
-    <script type="text/babel">
-        const { useState, useEffect, useRef } = React;
-        const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
-
-        function TypeSpecimenApp() {
-            const [weight, setWeight] = useState(400);
-            const [opsz, setOpsz] = useState(32);
-            const [letterIndex, setLetterIndex] = useState(0);
-            const [showDetails, setShowDetails] = useState(true);
-            const [isLowercase, setIsLowercase] = useState(false);
-            const [isDragging, setIsDragging] = useState(false);
-            const [touchStartX, setTouchStartX] = useState(0);
-            const containerRef = useRef(null);
-
-            const currentLetter = isLowercase 
-                ? ALPHABET[letterIndex].toLowerCase() 
-                : ALPHABET[letterIndex];
-
-            const handleInteraction = (clientY) => {
-                if (!containerRef.current) return;
-                const rect = containerRef.current.getBoundingClientRect();
-                
-                // Calculamos la posición relativa dentro del contenedor, no de la pantalla
-                // Limitamos y entre 0 y height para evitar valores fuera de rango al arrastrar fuera
-                const relativeY = Math.max(0, Math.min(rect.height, clientY - rect.top));
-                const y = relativeY / rect.height;
-                
-                // Vertical: weight (100-900)
-                const newWeight = 100 + (1 - y) * 800;
-                setWeight(Math.max(100, Math.min(900, Math.round(newWeight))));
-            };
-
-            const handleMouseDown = (e) => {
-                setIsDragging(true);
-                handleInteraction(e.clientY);
-            };
-
-            const handleMouseMove = (e) => {
-                if (!isDragging) return;
-                handleInteraction(e.clientY);
-            };
-
-            const handleMouseUp = () => {
-                setIsDragging(false);
-            };
-
-            const handleTouchStart = (e) => {
-                setIsDragging(true);
-                setTouchStartX(e.touches[0].clientX);
-                handleInteraction(e.touches[0].clientY);
-            };
-
-            const handleTouchMove = (e) => {
-                if (!isDragging) return;
-                // Prevenir el scroll de la página mientras se interactúa con el touch
-                if(e.cancelable) e.preventDefault();
-                handleInteraction(e.touches[0].clientY);
-            };
-
-            const handleTouchEnd = (e) => {
-                const touchEndX = e.changedTouches[0].clientX;
-                const diff = touchStartX - touchEndX;
-                
-                if (Math.abs(diff) > 50) {
-                    if (diff > 0) {
-                        setLetterIndex((prev) => (prev + 1) % ALPHABET.length);
-                    } else {
-                        setLetterIndex((prev) => (prev - 1 + ALPHABET.length) % ALPHABET.length);
-                    }
-                }
-                setIsDragging(false);
-            };
-
-            // Listeners globales de teclado
-            useEffect(() => {
-                const handleKeyDown = (e) => {
-                    // Solo actuar si el foco no está en un input/textarea de la página principal
-                    if (['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
-
-                    const key = e.key.toUpperCase();
-                    
-                    if (e.key === 'ArrowLeft') {
-                        e.preventDefault(); // Prevenir scroll horizontal de la web
-                        setLetterIndex((prev) => (prev - 1 + ALPHABET.length) % ALPHABET.length);
-                        return;
-                    }
-                    if (e.key === 'ArrowRight') {
-                        e.preventDefault();
-                        setLetterIndex((prev) => (prev + 1) % ALPHABET.length);
-                        return;
-                    }
-                    
-                    const index = ALPHABET.indexOf(key);
-                    if (index !== -1) {
-                        setLetterIndex(index);
-                    }
-                    
-                    if (key === 'D') setShowDetails(prev => !prev);
-                    if (key === 'L') setIsLowercase(prev => !prev);
-                };
-
-                window.addEventListener('keydown', handleKeyDown);
-                return () => window.removeEventListener('keydown', handleKeyDown);
-            }, []);
-
-            const fontVariationSettings = `'wght' ${weight}, 'opsz' ${opsz}`;
-            const fontSize = 50; 
-            const upm = 2816;
-            
-            const metrics = {
-                ascender: 2728,
-                descender: -680,
-                capHeight: 2048,
-                xHeight: 1536,
-            };
-            
-            const totalHeight = metrics.ascender + Math.abs(metrics.descender); 
-            const baselineFromTop = (metrics.ascender / totalHeight) * fontSize;
-            
-            // Cálculo de líneas base
-            const baselineTop = `calc(50% - ${fontSize/2.285}vmin + ${baselineFromTop}vmin)`;
-            const capHeightTop = `calc(50% - ${fontSize/2.265}vmin + ${baselineFromTop - (metrics.capHeight / upm) * fontSize}vmin)`;
-            const xHeightTop = `calc(50% - ${fontSize/2.45}vmin + ${baselineFromTop - (metrics.xHeight / upm) * fontSize}vmin)`;
-            const ascenderTop = `calc(50% - ${fontSize/1.8}vmin)`;
-            const descenderTop = `calc(50% - ${fontSize/2.45}vmin + ${baselineFromTop + (Math.abs(metrics.descender) / upm) * fontSize}vmin)`;
-
-            return (
-                /* CAMBIO AQUÍ: relative w-full h-full en lugar de fixed inset-0 */
-                <div className="relative w-full h-full bg-neutral-950 overflow-hidden select-none flex flex-col">
-                    
-                    {/* Toolbar */}
-                    <div className="flex flex-wrap items-center justify-between px-6 py-3 border-b border-neutral-800/50 gap-2">
-                        <div className="flex items-center gap-4">
-                            <div className="font-mono text-xs text-neutral-600">
-                                wght: <span className="text-neutral-400">{weight}</span>
-                            </div>
-                            <div className="font-mono text-xs text-neutral-600">
-                                opsz: <span className="text-neutral-400">{opsz}</span>
-                            </div>
-                        </div>
-
-                        <div className="flex items-center gap-4">
-                            <input
-                                type="range"
-                                value={opsz}
-                                min="14"
-                                max="32"
-                                step="0.1"
-                                onChange={(e) => setOpsz(Number(e.target.value))}
-                                className="w-24 h-1 bg-neutral-800 rounded-lg appearance-none cursor-pointer slider"
-                            />
-                            <label className="flex items-center gap-2 text-xs text-neutral-500 cursor-pointer hover:text-neutral-400">
-                                <input
-                                    type="checkbox"
-                                    checked={showDetails}
-                                    onChange={(e) => setShowDetails(e.target.checked)}
-                                    className="w-3 h-3 accent-neutral-500"
-                                />
-                                Details
-                            </label>
-                            <label className="flex items-center gap-2 text-xs text-neutral-500 cursor-pointer hover:text-neutral-400">
-                                <input
-                                    type="checkbox"
-                                    checked={isLowercase}
-                                    onChange={(e) => setIsLowercase(e.target.checked)}
-                                    className="w-3 h-3 accent-neutral-500"
-                                />
-                                Lowercase
-                            </label>
-                        </div>
-
-                        <div className="font-mono text-xs text-neutral-600 hidden sm:block">
-                            {currentLetter} · U+{(currentLetter.charCodeAt(0)).toString(16).toUpperCase().padStart(4, '0')}
-                        </div>
-                    </div>
-
-                    {/* Canvas principal */}
-                    <div 
-                        ref={containerRef}
-                        className="flex-1 relative cursor-ns-resize overflow-hidden touch-none"
-                        onMouseDown={handleMouseDown}
-                        onMouseMove={handleMouseMove}
-                        onMouseUp={handleMouseUp}
-                        onMouseLeave={handleMouseUp}
-                        onTouchStart={handleTouchStart}
-                        onTouchMove={handleTouchMove}
-                        onTouchEnd={handleTouchEnd}
-                    >
-                        {/* Grid de fondo */}
-                        <div 
-                            className="absolute inset-0 pointer-events-none opacity-5"
-                            style={{
-                                backgroundImage: 'linear-gradient(#525252 1px, transparent 1px), linear-gradient(90deg, #525252 1px, transparent 1px)',
-                                backgroundSize: '50px 50px'
-                            }}
-                        />
-
-                        {/* Guías tipográficas */}
-                        {showDetails && (
-                            <div className="absolute inset-0 pointer-events-none">
-                                <div className="absolute left-0 right-0 border-t border-dashed border-neutral-700" style={{ top: ascenderTop }}>
-                                    <span className="absolute left-4 -top-4 text-[9px] text-neutral-600 font-mono">ASCENDER</span>
-                                </div>
-                                <div className="absolute left-0 right-0 border-t border-dashed border-neutral-700" style={{ top: capHeightTop }}>
-                                    <span className="absolute left-4 -top-4 text-[9px] text-neutral-600 font-mono">CAP HEIGHT</span>
-                                </div>
-                                <div className="absolute left-0 right-0 border-t border-dashed border-neutral-700" style={{ top: xHeightTop }}>
-                                    <span className="absolute left-4 -top-4 text-[9px] text-neutral-600 font-mono">X-HEIGHT</span>
-                                </div>
-                                <div className="absolute left-0 right-0 border-t border-neutral-500" style={{ top: baselineTop }}>
-                                    <span className="absolute left-4 top-1 text-[9px] text-neutral-400 font-mono">BASELINE</span>
-                                </div>
-                                <div className="absolute left-0 right-0 border-t border-dashed border-neutral-700" style={{ top: descenderTop }}>
-                                    <span className="absolute left-4 top-1 text-[9px] text-neutral-600 font-mono">DESCENDER</span>
-                                </div>
-                            </div>
-                        )}
-
-                        {/* Letra principal */}
-                        <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
-                            <span
-                                style={{
-                                    fontFamily: 'Inter Variable, sans-serif',
-                                    fontVariationSettings,
-                                    color: '#e5e5e5',
-                                    fontSize: '50vmin', /* Nota: vmin se basa en la pantalla, no en el contenedor. */
-                                    lineHeight: 1,
-                                }}
-                            >
-                                {currentLetter}
-                            </span>
-                        </div>
-
-                        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 pointer-events-none">
-                            <div className="flex items-center gap-2 text-neutral-700 font-mono text-xs">
-                                <span>←</span>
-                                <span className="text-neutral-500">{letterIndex + 1}/{ALPHABET.length}</span>
-                                <span>→</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Footer */}
-                    <div className="flex items-center justify-between px-6 py-3 border-t border-neutral-800/50">
-                        <div className="font-mono text-xs text-neutral-700 hidden sm:block">
-                            {isDragging ? '↕ DRAGGING' : '↕ DRAG · ← → ARROWS'}
-                        </div>
-                        
-                        <div className="flex gap-1 overflow-x-auto pb-1 sm:pb-0 scrollbar-hide w-full sm:w-auto justify-center">
-                            {ALPHABET.map((letter, index) => (
-                                <button
-                                    key={letter}
-                                    onClick={() => setLetterIndex(index)}
-                                    className={`w-5 h-5 flex-shrink-0 text-[9px] font-mono transition-colors ${
-                                        index === letterIndex 
-                                            ? 'text-neutral-300 bg-neutral-800' 
-                                            : 'text-neutral-700 hover:text-neutral-500'
-                                    }`}
-                                >
-                                    {letter}
-                                </button>
-                            ))}
-                        </div>
-
-                        <div className="font-mono text-xs text-neutral-700 hidden sm:block">
-                            INTER
-                        </div>
-                    </div>
-                </div>
-            );
-        }
-
-        // Renderizar en el ID específico
-        const rootElement = document.getElementById('type-specimen-root');
-        if (rootElement) {
-            const root = ReactDOM.createRoot(rootElement);
-            root.render(<TypeSpecimenApp />);
-        }
-    </script>
 
 
     <footer id="contact" class="site-footer">
         <div class="footer-inter">
             Inter Specimen <br>
-           <span class="credit"> by Dariel Curbelo </span>
+            <span class="credit"> by Dariel Curbelo </span>
         </div>
         <div class="footer-container">
 
@@ -758,10 +499,8 @@
                 <div class="box-content">
                     Inter is a variable font family carefully crafted & designed for computer screens.
                     Inter features a tall x-height to aid in readability of mixed-case and lower-case text. Several OpenType features are provided as well, like contextual alternates that adjusts punctuation depending on the shape of surrounding glyphs, slashed zero for when you need to disambiguate "0" from "o", tabular numbers, etc.
-                    The Inter project is led by Rasmus Andersson, a Swedish maker–of–software living in San Francisco. To contribute, see github.com/rsms/inter
-
-                    <a href="#"> https://fonts.google.com/specimen/Inter ↗</a>
-
+                    The Inter project is led by Rasmus Andersson, a Swedish maker–of–software living in San Francisco. To contribute, see github.com/rsms/inter
+                    <a href="https://fonts.google.com/specimen/Inter ">↗</a>
                 </div>
             </details>
 
@@ -770,21 +509,12 @@
                     <span> <strong>FAQ</strong></span>
                 </summary>
                 <div class="box-content">
-
                     <a href="#">How do I enable and disable font features?</a>
-
                     <a href="#">I've made a cool thing that uses Inter</a>
-
                     <a href="#">How reliable are the fonts served from rsms.me/inter?</a>
                     <a href="#">This website claims work started in 2016, but the git repository's log says it started later?</a>
                     <a href="#">Can I change what OpenType features are enabled by default?</a>
-
-
                     <a href="#">I miss something from the old website</a>
-
-
-
-
                 </div>
             </details>
 
@@ -793,7 +523,7 @@
                     <span> <strong>Info</strong></span>
                 </summary>
                 <div class="box-content">
-                    Inter is a trademark of Rasmus Andersson (RSMS)
+                    Inter is a trademark of Rasmus Andersson (RSMS)
                 </div>
             </details>
 
@@ -801,7 +531,55 @@
     </footer>
 
 
+    <script src="folder-widget.js"></script>
     <script src="glyph-inspector.js"></script>
+    <script type="text/babel" src="type-specimen.js"></script>
+
     <script src="script.js"></script>
 
-</body></html>
+    <script>
+        // Inicialización Carpeta
+        if (typeof crearCarpeta === 'function') {
+            crearCarpeta('#mi-carpeta-descargas');
+        }
+
+        // Lógica descarga PDF
+        const pdfBtn = document.getElementById("download-pdf");
+        if(pdfBtn) {
+            pdfBtn.addEventListener("click", (e) => {
+                const img = e.currentTarget;
+                const url = img.dataset.pdf;
+                const filename = "Inter-specimen.pdf";
+
+                fetch(url)
+                    .then(res => res.blob())
+                    .then(blob => {
+                        const a = document.createElement("a");
+                        const urlBlob = window.URL.createObjectURL(blob);
+                        a.href = urlBlob;
+                        a.download = filename;
+                        document.body.appendChild(a);
+                        a.click();
+                        a.remove();
+                        window.URL.revokeObjectURL(urlBlob);
+                    })
+                    .catch(err => {
+                        console.error("No se pudo descargar el archivo:", err);
+                    });
+            });
+        }
+    </script>
+
+    <script>
+        window.addEventListener('load', function() {
+            // Elimina la clase que bloquea el scroll y la vista
+            document.body.classList.remove('is-loading');
+            
+            // Si tienes lógica para ocultar el loader manualmente en script.js, 
+            // este evento asegura que solo ocurra después de que TODO (imágenes, css) esté listo.
+            console.log("Assets fully loaded");
+        });
+    </script>
+
+</body>
+</html>
